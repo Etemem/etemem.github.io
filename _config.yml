@@ -16,10 +16,10 @@
 title: SmallWorldBigDream
 description: > # this means to ignore newlines until "baseurl:"
   Material theme based on <a href="http://materializecss.com">Materialize.css</a> for jekyll sites
-baseurl: "/matjek"
-url: "https://Etemem.github.io"
+baseurl: ""
+url: "https://etemem.github.io"
 permalink: /:year/:month/:day/:title
-repository: Etemem/matjek
+repository: Etemem/etemem.github.io
 paginate: 5
 
 # MatJek specific configurations
