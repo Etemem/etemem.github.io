@@ -58,18 +58,22 @@ a
       color: #fff
       font-size: 36px
       z-index: 999
-      line-height: 80px
+      line-height: 120px
 
 nav
   .page-title
-    font-size: 36px
+    font-size: 48px
     font-weight: bold // 如果新字体本身很粗，可能需要调整或移除这行
-    line-height: 80px
+    line-height: 120px
     font-family: 'Ephesis', cursive // <-- 添加这行，'Pacifico' 替换为您选的字体
+    background-image: linear-gradient(to right, #ff0000, #ffa500, #ffff00, #008000, #0000ff, #4b0082, #ee82ee) // 示例：彩虹渐变
+    -webkit-background-clip: text // 兼容 Webkit 浏览器 (Safari, Chrome)
+    background-clip: text
+    color: transparent
 
 nav
   &.top-nav
-    height: 80px
+    height: 120px
 
 // Footer
 footer.page-footer
