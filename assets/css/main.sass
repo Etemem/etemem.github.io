@@ -34,14 +34,13 @@ header
   a:hover
     text-decoration: none
 
+
   header
   .background
     // Webkit前缀
-    background: -webkit-radial-gradient(circle, #3AA17E 0%, #00537E 100%)
+    background: -webkit-radial-gradient(circle, #4fc3f7 0%, #1976d2 100%) // <- 修改后的蓝色渐变
     // 标准语法
-    background: radial-gradient(circle, #3AA17E 0%, #00537E 100%)
-
-
+    background: radial-gradient(circle, #4fc3f7 0%, #1976d2 100%) // <- 修改后的蓝色渐变
 
 
 a
@@ -104,3 +103,11 @@ main
   nav
     .page-title
       font-size: 20px
+
+// 修改顶部导航栏背景色
+header nav.top-nav
+  background-color: #64b5f6 // 设置为您想要的淡蓝色
+
+// 修改页脚背景色
+footer.page-footer
+  background-color: #64b5f6 // 设置为您想要的淡蓝色
