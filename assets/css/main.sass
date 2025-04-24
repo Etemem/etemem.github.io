@@ -38,10 +38,13 @@ header
   header
   .background
     // Webkit前缀
-    background: -webkit-radial-gradient(circle, #4fc3f7 0%, #1976d2 100%) // <- 修改后的蓝色渐变
+    //background: -webkit-radial-gradient(circle, #4fc3f7 0%, #1976d2 100%) // <- 修改后的蓝色渐变
     // 标准语法
-    background: radial-gradient(circle, #4fc3f7 0%, #1976d2 100%) // <- 修改后的蓝色渐变
-
+    //background: radial-gradient(circle, #4fc3f7 0%, #1976d2 100%) // <- 修改后的蓝色渐变
+    background-image: url('../res/left.jpg') 
+    background-size: cover   // 让图片覆盖整个区域
+    background-position: center // 将图片居中
+    background-repeat: no-repeat // 不重复图片
 
 a
   &.button-collapse
@@ -107,4 +110,31 @@ main
 
 
 ul#slide-out.side-nav.fixed
-  background-color: #f5f5f5 // 设置为您想要的浅灰色 (例如 Materialize grey lighten-4)
+  background-color: #f5f5f5 // 设置为浅灰色
+
+
+// 替换顶部导航栏背景
+header nav.top-nav.teal // 选择器包含 .teal 以提高优先级
+  background-color: transparent !important   // 强制移除 teal 背景色
+  background-image: url('../res/top.jpg') // 使用相对路径设置背景图片
+  background-size: cover                     // 可选: 图片覆盖区域
+  background-position: center                // 可选: 图片居中
+  background-repeat: no-repeat             // 可选: 不重复图片 (根据需要调整)
+
+// 替换 Footer 背景
+footer.page-footer.teal // 选择器包含 .teal 以提高优先级
+  background-color: transparent !important   // 强制移除 teal 背景色
+  background-image: url('../res/top.jpg') // 使用相对路径设置背景图片
+  background-size: cover                     // 可选: 图片覆盖区域
+  background-position: center                // 可选: 图片居中
+  background-repeat: no-repeat             // 可选: 不重复图片 (根据需要调整)
+
+
+header nav.top-nav .page-title
+  color: #FFFFFF // 示例：确保标题颜色在图片上可见 (根据需要修改)
+
+footer.page-footer .grey-text.text-lighten-4
+  color: #e0e0e0 !important // 示例：确保页脚文字颜色在图片上可见 (根据需要修改)
+
+footer.page-footer .footer-copyright .container
+  color: #e0e0e0 // 示例：确保版权文字颜色在图片上可见 (根据需要修改)
