@@ -4,6 +4,7 @@ title:  "Syntax Highlighting Test"
 date:   2017-03-24 01:30:13 +0800
 categories: default
 tags: test syntax
+featured_image: /assets/res/top.jpg 
 ---
 Jekyll uses Rouge by default for syntax highlighting, here are some tests.
 
