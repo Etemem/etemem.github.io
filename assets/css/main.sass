@@ -22,30 +22,30 @@ main
   background-size: auto
   background-position: center
 
-// 移除之前的固定 padding-left
+// --- 移除之前的固定 padding-left ---
 // header,
 // main,
 // footer
-//   padding-left: 300px
+//  padding-left: 300px
 
-.container
+// --- 修正：确保 .container 顶格，没有行首缩进 ---
+.container // <--- 确保这一行前面没有任何空格或 Tab
   width: 90%
 
 // Header
-header // 第一个 header 规则块开始
-  height: 110px // 保持您的设置
+header // <--- 顶格
+  height: 110px
 
   a:hover // 正确嵌套
     text-decoration: none
 
-  // --- 修正：移除多余 header，调整 .background 缩进 ---
-  .background // <--- .background 直接嵌套在 header 下，与 height, a:hover 同级
+  .background // 正确嵌套在 header 下
     background-image: url('../res/left.jpg')
     background-size: cover
     background-position: center
     background-repeat: no-repeat
 
-// 移动端按钮 (保持不变)
+// 移动端按钮 (顶格 a, 内部 & 嵌套)
 a
   &.button-collapse
     &.top-nav
@@ -58,24 +58,25 @@ a
       color: #fff
       font-size: 36px
       z-index: 999
-      line-height: 110px // 匹配 header 高度
+      line-height: 110px
 
+// nav 规则 (顶格 nav, 内部嵌套)
 nav
   .page-title
     font-size: 48px
     font-weight: bold
-    line-height: 110px // 匹配 header 高度
+    line-height: 110px
     font-family: 'Ephesis', cursive
     background-image: linear-gradient(to right, #ff0000, #ffa500, #ffff00, #008000, #0000ff, #4b0082, #ee82ee)
     -webkit-background-clip: text
     background-clip: text
     color: transparent !important
 
-nav
+nav // 同上，可以合并
   &.top-nav
-    height: 110px // 匹配 header 高度
+    height: 110px
 
-// Footer (保持不变)
+// Footer (顶格 footer, 内部嵌套)
 footer.page-footer
   margin-top: 10px
 
@@ -85,84 +86,84 @@ footer.page-footer
   p
     margin-top: 5px
 
-// Misc (保持不变)
+// Misc (顶格 blockquote)
 blockquote
   border-left-color: teal
 
-// --- 小屏幕 (< 992px) 样式 (保持不变) ---
-@media only screen and (max-width: 992px)
-  header,
+// --- 小屏幕 (< 992px) 样式 ---
+@media only screen and (max-width: 992px) // 顶格 @media
+  header, // 正确嵌套
   main,
   footer
     padding-left: 0 !important
 
-  nav
-    .nav-wrapper
+  nav // 正确嵌套
+    .nav-wrapper // 正确嵌套
       text-align: center
 
-// --- 更小屏幕 (< 600px) 样式 (保持不变) ---
-@media only screen and (max-width: 600px)
-  nav
-    .page-title
+// --- 更小屏幕 (< 600px) 样式 ---
+@media only screen and (max-width: 600px) // 顶格 @media
+  nav // 正确嵌套
+    .page-title // 正确嵌套
       font-size: 20px
 
-// --- 侧边栏固定样式 (保持不变) ---
-ul#slide-out.side-nav.fixed
+// --- 侧边栏固定样式 ---
+ul#slide-out.side-nav.fixed // 顶格 ul
   background-color: #f5f5f5
 
-// --- 背景替换规则 (保持不变) ---
-header nav.top-nav.teal
+// --- 背景替换规则 ---
+header nav.top-nav.teal // 顶格 header
   background-color: transparent !important
   background-image: url('../res/top.jpg')
   background-size: cover
   background-position: center
   background-repeat: no-repeat
 
-footer.page-footer.teal
+footer.page-footer.teal // 顶格 footer
   background-color: transparent !important
   background-image: url('../res/top.jpg')
   background-size: cover
   background-position: center
   background-repeat: no-repeat
 
-// --- 文字颜色确保可见 (保持不变) ---
-header nav.top-nav .page-title
+// --- 文字颜色确保可见 ---
+header nav.top-nav .page-title // 顶格 header
   color: #FFFFFF
 
-footer.page-footer .grey-text.text-lighten-4
+footer.page-footer .grey-text.text-lighten-4 // 顶格 footer
   color: #e0e0e0 !important
 
-footer.page-footer .footer-copyright .container
+footer.page-footer .footer-copyright .container // 顶格 footer
   color: #e0e0e0
 
-// --- 桌面端可收起侧边栏样式 (保持上次修正后的版本) ---
-$sidebar-width: 300px
+// --- 桌面端可收起侧边栏样式 ---
+$sidebar-width: 300px // 顶格变量
 $sidebar-collapsed-width: 70px
 $sidebar-transition-speed: 0.3s
 
-@media only screen and (min-width: 993px)
+@media only screen and (min-width: 993px) // 顶格 @media
 
-  #slide-out.side-nav.fixed
+  #slide-out.side-nav.fixed // 正确嵌套
     width: $sidebar-width
     transform: translateX(0)
     transition: width $sidebar-transition-speed ease
     overflow-x: hidden
 
-    li a
+    li a // 正确嵌套
       display: flex
       align-items: center
       padding: 0 24px
       white-space: nowrap
 
-      i.material-icons
+      i.material-icons // 正确嵌套
         margin-right: 32px
         transition: margin-right $sidebar-transition-speed ease
 
-      .nav-text
+      .nav-text // 正确嵌套
         opacity: 1
         transition: opacity 0.1s ease $sidebar-transition-speed
 
-    .userView
+    .userView // 正确嵌套
       padding: 32px 32px 15px 32px
       transition: padding $sidebar-transition-speed ease
       .background
@@ -174,16 +175,16 @@ $sidebar-transition-speed: 0.3s
         opacity: 1
         transition: opacity 0.1s ease $sidebar-transition-speed
 
-  header, main, footer
+  header, main, footer // 正确嵌套
     padding-left: $sidebar-width
     transition: padding-left $sidebar-transition-speed ease
 
-  body.sidebar-collapsed
+  body.sidebar-collapsed // 正确嵌套
 
-    #slide-out.side-nav.fixed
+    #slide-out.side-nav.fixed // 正确嵌套
       width: $sidebar-collapsed-width
 
-      .userView
+      .userView // 正确嵌套
         padding: 15px 0
         text-align: center
         .name, .email
@@ -195,19 +196,19 @@ $sidebar-transition-speed: 0.3s
           height: 48px
           margin: 0 auto
 
-      li a
+      li a // 正确嵌套
         justify-content: center
         padding: 0 12px
 
-        i.material-icons
+        i.material-icons // 正确嵌套
           margin-right: 0
 
-        .nav-text
+        .nav-text // 正确嵌套
           opacity: 0
           width: 0
           overflow: hidden
 
-    header, main, footer
+    header, main, footer // 正确嵌套
       padding-left: $sidebar-collapsed-width
 
 // --- 结束新增 ---
