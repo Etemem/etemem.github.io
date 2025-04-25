@@ -6,8 +6,6 @@ css: ["index.css"]
   {% for post in paginator.posts %}
   <div class="col s12">
     <div class="card hoverable horizontal-card {% if post.featured_image %}with-image{% endif %}"> 
-
-      {# 左侧：文本内容区域 #}
       <div class="card-stacked"> 
         <div class="card-content">
           <span id="post-title" class="card-title">{{ post.title }}</span>
@@ -24,7 +22,6 @@ css: ["index.css"]
         </div>
       </div>
 
-      {# 右侧：图片区域 (仅当 featured_image 存在时) #}
       {% if post.featured_image %}
       <div class="card-image">
         <img src="{{ post.featured_image | prepend: site.baseurl }}" alt="{{ post.title }} featured image">
