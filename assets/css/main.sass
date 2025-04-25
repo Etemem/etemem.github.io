@@ -17,36 +17,35 @@ a:active
 
 main
   flex: 1 0 auto
-  // --- 主内容区背景 ---
-  background-image: url('../res/subtle.jpg') !important // 确保这是您想要的背景图片
+  background-image: url('../res/subtle.jpg') !important
   background-repeat: repeat
-  background-size: auto // 您可以改为 'cover' 如果希望它覆盖整个区域
+  background-size: auto
   background-position: center
 
-// --- 注意：已移除这里的固定 padding-left ---
+// 移除之前的固定 padding-left
 // header,
 // main,
 // footer
-//  padding-left: 300px // <--- 已删除或注释掉
+//   padding-left: 300px
 
 .container
   width: 90%
 
 // Header
-header
-  height: 110px // 保持您设置的 110px 高度
-  // --- 移除多余的嵌套 header 选择器 ---
-  // header // <--- 删除这个多余的嵌套选择器
-  .background // 这个 .background 是 header 的直接子样式
+header // 第一个 header 规则块开始
+  height: 110px // 保持您的设置
+
+  a:hover // 正确嵌套
+    text-decoration: none
+
+  // --- 修正：移除多余 header，调整 .background 缩进 ---
+  .background // <--- .background 直接嵌套在 header 下，与 height, a:hover 同级
     background-image: url('../res/left.jpg')
     background-size: cover
     background-position: center
     background-repeat: no-repeat
 
-  a:hover // header 内 a 标签的悬浮效果
-    text-decoration: none
-
-// 移动端按钮样式 (保持不变)
+// 移动端按钮 (保持不变)
 a
   &.button-collapse
     &.top-nav
@@ -59,8 +58,7 @@ a
       color: #fff
       font-size: 36px
       z-index: 999
-      // line-height: 100px // 这个可能也需要调整为 header 高度 110px，但仅影响移动端按钮
-      line-height: 110px // 尝试调整以匹配 header 高度
+      line-height: 110px // 匹配 header 高度
 
 nav
   .page-title
@@ -77,7 +75,7 @@ nav
   &.top-nav
     height: 110px // 匹配 header 高度
 
-// Footer
+// Footer (保持不变)
 footer.page-footer
   margin-top: 10px
 
@@ -87,24 +85,16 @@ footer.page-footer
   p
     margin-top: 5px
 
-// Misc
+// Misc (保持不变)
 blockquote
   border-left-color: teal
-
-// --- 清理：移除重复的 main 规则块 ---
-// main // <--- 删除这个重复的块
-//   ul
-//     &:not(.browser-default)
-//       padding-left: 40px
-//       li
-//         list-style-type: disc
 
 // --- 小屏幕 (< 992px) 样式 (保持不变) ---
 @media only screen and (max-width: 992px)
   header,
   main,
   footer
-    padding-left: 0 !important // 确保小屏幕无内边距
+    padding-left: 0 !important
 
   nav
     .nav-wrapper
@@ -118,7 +108,7 @@ blockquote
 
 // --- 侧边栏固定样式 (保持不变) ---
 ul#slide-out.side-nav.fixed
-  background-color: #f5f5f5 // 设置为浅灰色
+  background-color: #f5f5f5
 
 // --- 背景替换规则 (保持不变) ---
 header nav.top-nav.teal
@@ -145,84 +135,79 @@ footer.page-footer .grey-text.text-lighten-4
 footer.page-footer .footer-copyright .container
   color: #e0e0e0
 
-// --- 新增：桌面端可收起侧边栏样式 ---
+// --- 桌面端可收起侧边栏样式 (保持上次修正后的版本) ---
 $sidebar-width: 300px
-$sidebar-collapsed-width: 70px // 收起后的宽度，可微调
+$sidebar-collapsed-width: 70px
 $sidebar-transition-speed: 0.3s
 
-@media only screen and (min-width: 993px) // 只对大于 992px 的屏幕生效
+@media only screen and (min-width: 993px)
 
-  #slide-out.side-nav.fixed // 侧边栏基础样式 (大屏幕)
-    width: $sidebar-width // 默认展开宽度
+  #slide-out.side-nav.fixed
+    width: $sidebar-width
     transform: translateX(0)
     transition: width $sidebar-transition-speed ease
     overflow-x: hidden
 
-    li a // 链接样式调整
+    li a
       display: flex
       align-items: center
-      padding: 0 24px // 内边距
+      padding: 0 24px
       white-space: nowrap
 
-      // --- 修正缩进：i 和 .nav-text 都是 li a 的子元素 ---
-      i.material-icons // 图标样式 (需要比 li a 多一级缩进)
+      i.material-icons
         margin-right: 32px
         transition: margin-right $sidebar-transition-speed ease
 
-      .nav-text // 文字样式 (需要比 li a 多一级缩进，与 i 对齐)
+      .nav-text
         opacity: 1
-        transition: opacity 0.1s ease $sidebar-transition-speed // 延迟隐藏文字
+        transition: opacity 0.1s ease $sidebar-transition-speed
 
-    .userView // 用户信息区
-      padding: 32px 32px 15px 32px // 调整内边距
+    .userView
+      padding: 32px 32px 15px 32px
       transition: padding $sidebar-transition-speed ease
       .background
-        // 保持不变
-      .circle // 头像
-        width: 64px // 默认大小
+      .circle
+        width: 64px
         height: 64px
         transition: width $sidebar-transition-speed ease, height $sidebar-transition-speed ease
-      .name, .email // 用户名和邮箱
+      .name, .email
         opacity: 1
-        transition: opacity 0.1s ease $sidebar-transition-speed // 延迟隐藏
+        transition: opacity 0.1s ease $sidebar-transition-speed
 
-  header, main, footer // 主内容区基础样式 (大屏幕)
-    padding-left: $sidebar-width // 默认内边距
+  header, main, footer
+    padding-left: $sidebar-width
     transition: padding-left $sidebar-transition-speed ease
 
-  // --- 收起状态的样式 ---
   body.sidebar-collapsed
 
-    #slide-out.side-nav.fixed // 侧边栏收起样式
+    #slide-out.side-nav.fixed
       width: $sidebar-collapsed-width
 
-      .userView // 用户信息区域收起时
-        padding: 15px 0 // 调整内边距，让小头像居中
-        text-align: center // 辅助居中
-        .name, .email // 隐藏文字
+      .userView
+        padding: 15px 0
+        text-align: center
+        .name, .email
           opacity: 0
-          height: 0 // 避免占位
+          height: 0
           display: none
-        .circle // 头像缩小
+        .circle
           width: 48px
           height: 48px
-          margin: 0 auto // 居中头像
+          margin: 0 auto
 
-      li a // 收起时链接样式
+      li a
         justify-content: center
         padding: 0 12px
 
-        // --- 修正缩进：i 和 .nav-text 都是 li a 的子元素 ---
-        i.material-icons // 图标
+        i.material-icons
           margin-right: 0
 
-        .nav-text // 文字隐藏
+        .nav-text
           opacity: 0
           width: 0
           overflow: hidden
-          // display: none // 使用 opacity 过渡，不直接 display none
 
-    header, main, footer // 主内容区收起时的内边距
+    header, main, footer
       padding-left: $sidebar-collapsed-width
 
 // --- 结束新增 ---
