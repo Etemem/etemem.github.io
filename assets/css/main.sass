@@ -149,27 +149,3 @@ footer.page-footer .grey-text.text-lighten-4
 footer.page-footer .footer-copyright .container
   color: #e0e0e0 // 示例：确保版权文字颜色在图片上可见 (根据需要修改)
 
-// 侧边栏基础样式
-ul#slide-out.side-nav
-  transform: translateX(-105%) // 初始状态隐藏在左侧屏幕外 (用 105% 避免边缘)
-  transition: transform 0.3s ease // 添加过渡动画
-
-// 主内容区基础样式
-header, main, footer
-  transition: padding-left 0.3s ease // 添加过渡动画
-  padding-left: 0 // 默认无左内边距
-
-// 当 body 有 .sidebar-open 类时 (侧边栏打开状态)
-body.sidebar-open
-  ul#slide-out.side-nav
-    transform: translateX(0) // 侧边栏滑入
-
-  header, main, footer
-    padding-left: 300px // 主内容区添加左内边距 (推开效果)
-    // 注意：这里的 300px 应该与您侧边栏的实际宽度一致
-
-// 确保在小屏幕上，Materialize 的默认行为（如果有）不冲突
-@media only screen and (max-width: 992px)
-  // 可能需要重置或调整这里的 padding，取决于您希望小屏幕的行为
-  header, main, footer
-    padding-left: 0 !important // 小屏幕始终无 padding
