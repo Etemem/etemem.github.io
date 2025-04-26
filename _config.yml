@@ -22,14 +22,13 @@ permalink: /:year/:month/:day/:title
 repository: Etemem/etemem.github.io
 paginate: 5
 
-# MatJek specific configurations
 github_profile: "https://github.com/Etemem"
 user: "SmallWorldBigDream"
 user_email: "yuningluo@nuaa.edu.com"
-contact_url: "https://goo.gl/tVljbV"
-google_tracking_id: ""
-google_site_verification: ""
-disqus_shortname: ""
+contact_url: "https://forms.gle/nxFFpZJ7APzCuxdt6"
+google_tracking_id: "G-VHKV23MC8R"
+google_site_verification: "ePZGpDBoWIdw5GZ-RFeW4tNGA9qtEnCxw6chdyAgJR0"
+disqus_shortname: "smallworldbigdream"
 
 # Build settings
 markdown: kramdown
