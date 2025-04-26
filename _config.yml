@@ -44,3 +44,31 @@ exclude:
 sass:
   style: compressed
 future: true
+
+# Language Settings
+languages:
+  en: # 英文
+    sidebar:
+      home: "Home"
+      projects: "Projects"
+      categories: "Categories"
+      tags: "Tags"
+      rss: "RSS"
+      about: "About"
+      contact: "Contact"
+      language_toggle: "中文" # 切换按钮上显示的文字 (当前为英文时显示“中文”)
+      language_icon: "language" # Material Icon for the toggle button
+  zh: # 中文
+    sidebar:
+      home: "首页"
+      projects: "项目"
+      categories: "分类"
+      tags: "标签"
+      rss: "订阅"
+      about: "关于"
+      contact: "联系"
+      language_toggle: "English" # 切换按钮上显示的文字 (当前为中文时显示“English”)
+      language_icon: "language" # Material Icon for the toggle button
+
+# Default Language
+default_language: "en"

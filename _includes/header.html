@@ -13,8 +13,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{site.baseurl}}/assets/res/favicon.ico">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
     <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="{{site.baseurl}}/assets/css/main.css">
-    {% for css in layout.css %}
+    <link rel="stylesheet" href="{{site.baseurl}}/assets/css/main.css"> {% for css in layout.css %}
     {% if css contains "//" %}
     <link rel="stylesheet" href="{{css}}">
     {% else %}
@@ -32,7 +31,12 @@
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{{site.baseurl}}/feed.xml">
     <link rel="sitemap" type="application/xml" title="Sitemap" href="{{site.baseurl}}/sitemap.xml">
     {% seo title=false %}
-  </head>
+
+    <script>
+      window.siteLanguages = {{ site.languages | jsonify }};
+      window.defaultLanguage = "{{ site.default_language | default: 'en' }}";
+    </script>
+    </head>
   <body>
     <header>
       <nav class="top-nav teal">
@@ -56,18 +60,24 @@
             <span class="white-text email">{{site.user_email}}</span>
           </div>
         </li>
-        <li>
+        <li id="sidebar-toggle-item">
           <a href="#" id="sidebar-toggle-button" class="waves-effect"> <i class="material-icons">menu</i> </a>
         </li>
-        <li><a class="waves-effect" href="{{site.baseurl}}/"><i class="material-icons">home</i><span class="nav-text">Home</span></a></li>
-        <li><a class="waves-effect" href="{{site.baseurl}}/projects"><i class="material-icons">description</i><span class="nav-text">Projects</span></a></li>
-        <li><a class="waves-effect" href="{{site.baseurl}}/categories"><i class="material-icons">sort</i><span class="nav-text">Categories</span></a></li>
-        <li><a class="waves-effect" href="{{site.baseurl}}/tags"><i class="material-icons">label</i><span class="nav-text">Tags</span></a></li>
-        <li><a class="waves-effect" href="{{site.baseurl}}/feed.xml" target="_blank"><i class="material-icons">rss_feed</i><span class="nav-text">RSS</span></a></li>
+        <li><a class="waves-effect" href="{{site.baseurl}}/"><i class="material-icons">home</i><span class="nav-text" data-key="home">Home</span></a></li>
+        <li><a class="waves-effect" href="{{site.baseurl}}/projects"><i class="material-icons">description</i><span class="nav-text" data-key="projects">Projects</span></a></li>
+        <li><a class="waves-effect" href="{{site.baseurl}}/categories"><i class="material-icons">sort</i><span class="nav-text" data-key="categories">Categories</span></a></li>
+        <li><a class="waves-effect" href="{{site.baseurl}}/tags"><i class="material-icons">label</i><span class="nav-text" data-key="tags">Tags</span></a></li>
+        <li><a class="waves-effect" href="{{site.baseurl}}/feed.xml" target="_blank"><i class="material-icons">rss_feed</i><span class="nav-text" data-key="rss">RSS</span></a></li>
         <li><div class="divider"></div></li>
-        <li><a class="waves-effect" href="{{site.baseurl}}/about"><i class="material-icons">person</i><span class="nav-text">About</span></a></li>
-        <li><a class="waves-effect" href="{{site.baseurl}}/contact"><i class="material-icons">email</i><span class="nav-text">Contact</span></a></li>
-      </ul>
+        <li><a class="waves-effect" href="{{site.baseurl}}/about"><i class="material-icons">person</i><span class="nav-text" data-key="about">About</span></a></li>
+        <li><a class="waves-effect" href="{{site.baseurl}}/contact"><i class="material-icons">email</i><span class="nav-text" data-key="contact">Contact</span></a></li>
+        <li><div class="divider"></div></li>
+        <li>
+          <a href="#" id="language-toggle-button" class="waves-effect">
+            <i class="material-icons" data-key="language_icon">language</i>
+            <span class="nav-text" data-key="language_toggle">中文</span> </a>
+        </li>
+        </ul>
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Ephesis&display=swap" rel="stylesheet">
