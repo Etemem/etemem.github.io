@@ -44,8 +44,9 @@ A: 咖啡店一开始有5个苹果。他们用了2个，所以剩下 5 - 2 = 3�
 - **增强可解释性：** 通过观察模型生成的中间步骤，我们可以更好地理解模型的“思考”过程，判断它是如何得出最终答案的，这有助于调试和信任模型的输出。如果中间步骤出现错误，也更容易定位问题所在。
 - **激发涌现能力：** 有趣的是，思维链的效果似乎在足够大的模型（通常参数量超过某个阈值）上才会显现，这被认为是大型模型“涌现能力”的一种体现。
 
-![思维链过程示意图](assets/image/cot.jpg){:.img-center .img-responsive .img-styled .img-max-50}
-_(CoT 示意图)_
+<img src="assets/image/cot.jpg" 
+     alt="思维链过程示意" 
+     style="max-width: 40%; height: auto; display: block; margin: 0 auto;">
 
 ##### 不仅仅是示例：Zero-shot CoT
 
