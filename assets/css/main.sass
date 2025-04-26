@@ -41,20 +41,20 @@ header
 
 // 移动端按钮
 a
-  &.button-collapse // 这个类名主要由 Materialize 用于移动端
-    &.top-nav // 这个类可能只用于移动端了
-      position: absolute // 可能仅移动端需要
+  &.button-collapse
+    &.top-nav
+      position: absolute
       text-align: center
       height: 48px
       width: 48px
-      top: 0 // 可能仅移动端需要
+      top: 0
       // float: none
       color: #fff
       font-size: 36px
-      z-index: 999 // 确保移动端按钮在最上层
+      z-index: 999
       line-height: 110px
       @media only screen and (min-width: 993px)
-        display: none !important // 在大屏幕上隐藏移动端按钮
+        display: none !important
 
 
 // nav 规则
@@ -147,21 +147,21 @@ $sidebar-transition-speed: 0.3s
     overflow-x: hidden
 
     // 用户信息区域样式
-    .userView
+    .userView // 2 spaces
       padding: 32px 32px 15px 32px
       transition: padding $sidebar-transition-speed ease
-      .background
-      .circle
+      .background // 4 spaces
+      .circle // 4 spaces
         width: 64px
         height: 64px
         transition: width $sidebar-transition-speed ease, height $sidebar-transition-speed ease
-      .name, .email
+      .name, .email // 4 spaces
         opacity: 1
         transition: opacity 0.1s ease $sidebar-transition-speed
 
-    // 所有 li 内的 a 标签基础样式
-    li
-      a
+    // 所有 li 内的 a 标签基础样式 (展开状态)
+    li // 2 spaces
+      a // 4 spaces
         display: flex
         align-items: center
         height: 48px
@@ -169,69 +169,59 @@ $sidebar-transition-speed: 0.3s
         padding: 0 24px
         white-space: nowrap
 
-        i.material-icons
+        i.material-icons // 6 spaces
           margin-right: 32px
           transition: margin-right $sidebar-transition-speed ease
 
-        .nav-text
+        .nav-text // 6 spaces
           opacity: 1
           transition: opacity 0.1s ease $sidebar-transition-speed
 
-      // 针对切换按钮 li 的特殊样式 (假设 li 的 id 为 sidebar-toggle-item)
-      &#sidebar-toggle-item
-        // 这个选择器本身没有特定样式，因为 a 标签继承上面的规则
-        // a#sidebar-toggle-button // <<< 移除这个空规则，消除 line 153 警告
-        //   // 无需单独样式，继承 li a
-        //   i.material-icons
-        //     color: #616161 // 如果需要可以取消注释这个
+      // 针对切换按钮 li 的特殊样式 (展开状态) - 移除空规则
+      // &#sidebar-toggle-item
+      //   a#sidebar-toggle-button
 
-  // 主内容区域的左边距
-  header, main, footer
+  // 主内容区域的左边距 (展开状态)
+  header, main, footer // 2 spaces
     padding-left: $sidebar-width
     transition: padding-left $sidebar-transition-speed ease
 
   // --- 收起状态下的样式 ---
-  body.sidebar-collapsed
+  body.sidebar-collapsed // 0 spaces
 
-    #slide-out.side-nav.fixed
-      width: $sidebar-collapsed-width // 收起后的宽度
+    #slide-out.side-nav.fixed // 2 spaces
+      width: $sidebar-collapsed-width
 
       // 用户信息区域收起样式
-      .userView // 2个空格缩进
+      .userView // 4 spaces
         padding: 15px 0
         text-align: center
-        .name, .email // 4个空格缩进
+        .name, .email // 6 spaces
           opacity: 0
           height: 0
           display: none
-        .circle // 4个空格缩进
+        .circle // 6 spaces
           width: 48px
           height: 48px
           margin: 0 auto
 
-      // 收起时所有普通 li 内的 a 标签样式 (排除切换按钮)
-      li:not(#sidebar-toggle-item) // 2个空格缩进
-        a // 4个空格缩进
-          justify-content: center
-          padding: 0 12px
+      // *** 重构收起状态的 li 样式 ***
+      // 1. 应用通用样式到所有 li > a
+      li // 4 spaces
+        a // 6 spaces
+          justify-content: center // 图标居中
+          padding: 0 12px      // 统一收起时的 padding
+          i.material-icons // 8 spaces
+            margin-right: 0      // 图标无右边距
 
-          i.material-icons // 6个空格缩进
-            margin-right: 0
-
-          .nav-text // 6个空格缩进
-            opacity: 0
-            width: 0
-            overflow: hidden
-
-      // 针对切换按钮 li 在收起时的特殊样式
-      li#sidebar-toggle-item // 2个空格缩进 (与上面的 li 同级)
-        a#sidebar-toggle-button // 4个空格缩进
-          justify-content: center
-          padding: 0 12px
-          i.material-icons // 6个空格缩进
-            margin-right: 0
+      // 2. 单独隐藏非切换按钮的文本
+      li:not(#sidebar-toggle-item) // 4 spaces (与上面的 li 同级)
+        .nav-text // 6 spaces
+          opacity: 0
+          width: 0
+          overflow: hidden
 
 
     // 主内容区域在侧边栏收起后的左边距
-    header, main, footer // 2个空格缩进
-      padding-left: $sidebar-collapsed-width // 4个空格缩进
+    header, main, footer // 2 spaces
+      padding-left: $sidebar-collapsed-width // 4 spaces
