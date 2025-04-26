@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "彻底改变NLP的游戏规则：深入理解Transformer模型"
-date: 2025-04-26 11:00:00 +0800 # 请修改为实际发布日期
-categories: [AI, NLP] # 示例分类
-tags: [transformer, attention, deep-learning, llm] # 示例标签
-comments: 1 # 如果允许评论
+date: 2025-04-26 11:00:00 +0800
+categories: [AI, NLP]
+tags: [transformer, attention, deep-learning, llm]
+comments: 1
 featured_image: /assets/res/rocket.jpg
 ---
 
