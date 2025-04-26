@@ -39,22 +39,20 @@ header
     background-position: center
     background-repeat: no-repeat
 
-// 移动端按钮 (旧的桌面端按钮样式已移入侧边栏，此处样式不再需要用于桌面端定位)
+// 移动端按钮
 a
   &.button-collapse // 这个类名主要由 Materialize 用于移动端
     &.top-nav // 这个类可能只用于移动端了
-      // 保留移动端可能需要的样式，但移除桌面端定位相关的
       position: absolute // 可能仅移动端需要
       text-align: center
       height: 48px
       width: 48px
       top: 0 // 可能仅移动端需要
-      // float: none // float可能不再需要
+      // float: none
       color: #fff
       font-size: 36px
       z-index: 999 // 确保移动端按钮在最上层
-      line-height: 110px // 调整为与header一致，或根据移动端实际情况调整
-      // 确保在非大屏幕上显示
+      line-height: 110px
       @media only screen and (min-width: 993px)
         display: none !important // 在大屏幕上隐藏移动端按钮
 
@@ -94,7 +92,7 @@ blockquote
   header,
   main,
   footer
-    padding-left: 0 !important // 小屏幕时移除侧边栏宽度影响
+    padding-left: 0 !important
 
   nav
     .nav-wrapper
@@ -164,28 +162,28 @@ $sidebar-transition-speed: 0.3s
     // 所有 li 内的 a 标签基础样式
     li
       a
-        display: flex         // 改为 flex 布局以对齐图标和文字
-        align-items: center   // 垂直居中
-        height: 48px          // 标准 Materialize 高度
-        // line-height: 48px     // flex 布局下通常不需要 line-height 对齐
-        padding: 0 24px       // 默认展开时的 padding
-        white-space: nowrap   // 防止文字换行
+        display: flex
+        align-items: center
+        height: 48px
+        // line-height: 48px
+        padding: 0 24px
+        white-space: nowrap
 
         i.material-icons
-          margin-right: 32px    // 图标和文字的间距
-          transition: margin-right $sidebar-transition-speed ease // 平滑过渡
+          margin-right: 32px
+          transition: margin-right $sidebar-transition-speed ease
 
         .nav-text
           opacity: 1
-          transition: opacity 0.1s ease $sidebar-transition-speed // 文本渐隐过渡
+          transition: opacity 0.1s ease $sidebar-transition-speed
 
       // 针对切换按钮 li 的特殊样式 (假设 li 的 id 为 sidebar-toggle-item)
       &#sidebar-toggle-item
-        a#sidebar-toggle-button // 选择按钮 a 标签
-          // 继承上方 li a 的大部分样式
-          i.material-icons
-            // 继承上方 li a i 的 margin-right
-            color: #616161 // 可以设置按钮图标颜色，如果需要的话
+        // 这个选择器本身没有特定样式，因为 a 标签继承上面的规则
+        // a#sidebar-toggle-button // <<< 移除这个空规则，消除 line 153 警告
+        //   // 无需单独样式，继承 li a
+        //   i.material-icons
+        //     color: #616161 // 如果需要可以取消注释这个
 
   // 主内容区域的左边距
   header, main, footer
@@ -199,42 +197,41 @@ $sidebar-transition-speed: 0.3s
       width: $sidebar-collapsed-width // 收起后的宽度
 
       // 用户信息区域收起样式
-      .userView
+      .userView // 2个空格缩进
         padding: 15px 0
         text-align: center
-        .name, .email
+        .name, .email // 4个空格缩进
           opacity: 0
           height: 0
           display: none
-        .circle
+        .circle // 4个空格缩进
           width: 48px
           height: 48px
           margin: 0 auto
 
-      // *** 修复点：调整此处的 li 和 #sidebar-toggle-item 的层级 ***
-      // 收起时所有 li 内的 a 标签样式
-      li // 这个 li 应用于所有侧边栏项
-        a // 这个 a 应用于所有侧边栏项内的链接
-          justify-content: center // 水平居中图标
-          padding: 0 12px      // 调整收起时的 padding
+      // 收起时所有普通 li 内的 a 标签样式 (排除切换按钮)
+      li:not(#sidebar-toggle-item) // 2个空格缩进
+        a // 4个空格缩进
+          justify-content: center
+          padding: 0 12px
 
-          i.material-icons
-            margin-right: 0      // 收起时移除右边距
+          i.material-icons // 6个空格缩进
+            margin-right: 0
 
-          // 收起时隐藏文字
-          .nav-text
+          .nav-text // 6个空格缩进
             opacity: 0
             width: 0
             overflow: hidden
 
-      // 针对切换按钮 li 的特殊样式 (现在与上面的 li 同级，嵌套在 #slide-out 下)
-      li#sidebar-toggle-item // 确保这个选择器选中了正确的 li
-        a#sidebar-toggle-button
-          // 样式应该继承自上面的通用 li a 规则，无需重复或覆盖
-          // 如果需要特定覆盖，可以在这里添加，例如：
-          // background-color: #eee // 仅为示例
+      // 针对切换按钮 li 在收起时的特殊样式
+      li#sidebar-toggle-item // 2个空格缩进 (与上面的 li 同级)
+        a#sidebar-toggle-button // 4个空格缩进
+          justify-content: center
+          padding: 0 12px
+          i.material-icons // 6个空格缩进
+            margin-right: 0
 
 
     // 主内容区域在侧边栏收起后的左边距
-    header, main, footer
-      padding-left: $sidebar-collapsed-width
+    header, main, footer // 2个空格缩进
+      padding-left: $sidebar-collapsed-width // 4个空格缩进
