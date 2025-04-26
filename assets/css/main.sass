@@ -39,20 +39,25 @@ header
     background-position: center
     background-repeat: no-repeat
 
-// 移动端按钮
+// 移动端按钮 (旧的桌面端按钮样式已移入侧边栏，此处样式不再需要用于桌面端定位)
 a
-  &.button-collapse
-    &.top-nav
-      position: absolute
+  &.button-collapse // 这个类名主要由 Materialize 用于移动端
+    &.top-nav // 这个类可能只用于移动端了
+      // 保留移动端可能需要的样式，但移除桌面端定位相关的
+      position: absolute // 可能仅移动端需要
       text-align: center
       height: 48px
       width: 48px
-      top: 0
-      float: none
+      top: 0 // 可能仅移动端需要
+      // float: none // float可能不再需要
       color: #fff
       font-size: 36px
-      z-index: 999
-      line-height: 110px
+      z-index: 999 // 确保移动端按钮在最上层
+      line-height: 110px // 调整为与header一致，或根据移动端实际情况调整
+      // 确保在非大屏幕上显示
+      @media only screen and (min-width: 993px)
+        display: none !important // 在大屏幕上隐藏移动端按钮
+
 
 // nav 规则
 nav
@@ -89,7 +94,7 @@ blockquote
   header,
   main,
   footer
-    padding-left: 0 !important
+    padding-left: 0 !important // 小屏幕时移除侧边栏宽度影响
 
   nav
     .nav-wrapper
@@ -135,7 +140,7 @@ $sidebar-width: 300px
 $sidebar-collapsed-width: 70px
 $sidebar-transition-speed: 0.3s
 
-@media only screen and (min-width: 993px)
+@media only screen and (min-width: 993px) // 仅在大屏幕应用
 
   #slide-out.side-nav.fixed
     width: $sidebar-width
@@ -143,21 +148,35 @@ $sidebar-transition-speed: 0.3s
     transition: width $sidebar-transition-speed ease
     overflow-x: hidden
 
-    li a
-      display: flex
-      align-items: center
-      padding: 0 24px
-      white-space: nowrap
+    li
+      // 基本链接样式
+      a
+        display: flex         // 改为 flex 布局以对齐图标和文字
+        align-items: center   // 垂直居中
+        height: 48px          // 标准 Materialize 高度
+        line-height: 48px     // 辅助垂直对齐 (虽然 flex 更佳)
+        padding: 0 24px       // 默认展开时的 padding
+        white-space: nowrap   // 防止文字换行
 
-      i.material-icons
-        margin-right: 32px
-        transition: margin-right $sidebar-transition-speed ease
+        i.material-icons
+          margin-right: 32px    // 图标和文字的间距
+          transition: margin-right $sidebar-transition-speed ease // 平滑过渡
 
-      .nav-text
-        opacity: 1
-        transition: opacity 0.1s ease $sidebar-transition-speed
+        .nav-text
+          opacity: 1
+          transition: opacity 0.1s ease $sidebar-transition-speed // 文本渐隐过渡
 
-    .userView
+      // 新增: 针对切换按钮 li 的特殊样式 (假设 li 的 id 为 sidebar-toggle-item)
+      &#sidebar-toggle-item
+        a#sidebar-toggle-button // 选择按钮 a 标签
+          // padding: 0 24px // 继承上方 li a 的 padding
+          // display: flex // 继承上方 li a 的 display
+          // align-items: center // 继承上方 li a 的 align-items
+          i.material-icons
+            // margin-right: 32px // 继承上方 li a i 的 margin
+            color: #616161 // 可以设置按钮图标颜色
+
+    .userView // 用户信息区域样式保持不变
       padding: 32px 32px 15px 32px
       transition: padding $sidebar-transition-speed ease
       .background
@@ -169,16 +188,18 @@ $sidebar-transition-speed: 0.3s
         opacity: 1
         transition: opacity 0.1s ease $sidebar-transition-speed
 
+  // 主内容区域的左边距 (保持不变)
   header, main, footer
     padding-left: $sidebar-width
     transition: padding-left $sidebar-transition-speed ease
 
+  // --- 收起状态下的样式 ---
   body.sidebar-collapsed
 
     #slide-out.side-nav.fixed
-      width: $sidebar-collapsed-width
+      width: $sidebar-collapsed-width // 收起后的宽度
 
-      .userView
+      .userView // 用户信息区域收起样式 (保持不变)
         padding: 15px 0
         text-align: center
         .name, .email
@@ -190,17 +211,29 @@ $sidebar-transition-speed: 0.3s
           height: 48px
           margin: 0 auto
 
-      li a
-        justify-content: center
-        padding: 0 12px
+      // 收起时所有 li 内的 a 标签样式
+      li
+        a
+          justify-content: center // 水平居中图标
+          padding: 0 12px      // 调整收起时的 padding
 
-        i.material-icons
-          margin-right: 0
+          i.material-icons
+            margin-right: 0      // 收起时移除右边距
 
-        .nav-text
-          opacity: 0
-          width: 0
-          overflow: hidden
+          // 收起时隐藏文字
+          .nav-text
+            opacity: 0
+            width: 0
+            overflow: hidden
 
+        // 新增: 确保切换按钮在收起时也正确对齐
+        &#sidebar-toggle-item
+          a#sidebar-toggle-button
+            justify-content: center // 水平居中图标
+            padding: 0 12px      // 与其他项一致
+            i.material-icons
+              margin-right: 0      // 与其他项一致
+
+    // 主内容区域在侧边栏收起后的左边距 (保持不变)
     header, main, footer
       padding-left: $sidebar-collapsed-width
