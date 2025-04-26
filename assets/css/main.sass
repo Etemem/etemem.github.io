@@ -148,35 +148,8 @@ $sidebar-transition-speed: 0.3s
     transition: width $sidebar-transition-speed ease
     overflow-x: hidden
 
-    li
-      // 基本链接样式
-      a
-        display: flex         // 改为 flex 布局以对齐图标和文字
-        align-items: center   // 垂直居中
-        height: 48px          // 标准 Materialize 高度
-        line-height: 48px     // 辅助垂直对齐 (虽然 flex 更佳)
-        padding: 0 24px       // 默认展开时的 padding
-        white-space: nowrap   // 防止文字换行
-
-        i.material-icons
-          margin-right: 32px    // 图标和文字的间距
-          transition: margin-right $sidebar-transition-speed ease // 平滑过渡
-
-        .nav-text
-          opacity: 1
-          transition: opacity 0.1s ease $sidebar-transition-speed // 文本渐隐过渡
-
-      // 新增: 针对切换按钮 li 的特殊样式 (假设 li 的 id 为 sidebar-toggle-item)
-      &#sidebar-toggle-item
-        a#sidebar-toggle-button // 选择按钮 a 标签
-          // padding: 0 24px // 继承上方 li a 的 padding
-          // display: flex // 继承上方 li a 的 display
-          // align-items: center // 继承上方 li a 的 align-items
-          i.material-icons
-            // margin-right: 32px // 继承上方 li a i 的 margin
-            color: #616161 // 可以设置按钮图标颜色
-
-    .userView // 用户信息区域样式保持不变
+    // 用户信息区域样式
+    .userView
       padding: 32px 32px 15px 32px
       transition: padding $sidebar-transition-speed ease
       .background
@@ -188,7 +161,33 @@ $sidebar-transition-speed: 0.3s
         opacity: 1
         transition: opacity 0.1s ease $sidebar-transition-speed
 
-  // 主内容区域的左边距 (保持不变)
+    // 所有 li 内的 a 标签基础样式
+    li
+      a
+        display: flex         // 改为 flex 布局以对齐图标和文字
+        align-items: center   // 垂直居中
+        height: 48px          // 标准 Materialize 高度
+        // line-height: 48px     // flex 布局下通常不需要 line-height 对齐
+        padding: 0 24px       // 默认展开时的 padding
+        white-space: nowrap   // 防止文字换行
+
+        i.material-icons
+          margin-right: 32px    // 图标和文字的间距
+          transition: margin-right $sidebar-transition-speed ease // 平滑过渡
+
+        .nav-text
+          opacity: 1
+          transition: opacity 0.1s ease $sidebar-transition-speed // 文本渐隐过渡
+
+      // 针对切换按钮 li 的特殊样式 (假设 li 的 id 为 sidebar-toggle-item)
+      &#sidebar-toggle-item
+        a#sidebar-toggle-button // 选择按钮 a 标签
+          // 继承上方 li a 的大部分样式
+          i.material-icons
+            // 继承上方 li a i 的 margin-right
+            color: #616161 // 可以设置按钮图标颜色，如果需要的话
+
+  // 主内容区域的左边距
   header, main, footer
     padding-left: $sidebar-width
     transition: padding-left $sidebar-transition-speed ease
@@ -199,7 +198,8 @@ $sidebar-transition-speed: 0.3s
     #slide-out.side-nav.fixed
       width: $sidebar-collapsed-width // 收起后的宽度
 
-      .userView // 用户信息区域收起样式 (保持不变)
+      // 用户信息区域收起样式
+      .userView
         padding: 15px 0
         text-align: center
         .name, .email
@@ -211,9 +211,10 @@ $sidebar-transition-speed: 0.3s
           height: 48px
           margin: 0 auto
 
+      // *** 修复点：调整此处的 li 和 #sidebar-toggle-item 的层级 ***
       // 收起时所有 li 内的 a 标签样式
-      li
-        a
+      li // 这个 li 应用于所有侧边栏项
+        a // 这个 a 应用于所有侧边栏项内的链接
           justify-content: center // 水平居中图标
           padding: 0 12px      // 调整收起时的 padding
 
@@ -226,14 +227,14 @@ $sidebar-transition-speed: 0.3s
             width: 0
             overflow: hidden
 
-        // 新增: 确保切换按钮在收起时也正确对齐
-        &#sidebar-toggle-item
-          a#sidebar-toggle-button
-            justify-content: center // 水平居中图标
-            padding: 0 12px      // 与其他项一致
-            i.material-icons
-              margin-right: 0      // 与其他项一致
+      // 针对切换按钮 li 的特殊样式 (现在与上面的 li 同级，嵌套在 #slide-out 下)
+      li#sidebar-toggle-item // 确保这个选择器选中了正确的 li
+        a#sidebar-toggle-button
+          // 样式应该继承自上面的通用 li a 规则，无需重复或覆盖
+          // 如果需要特定覆盖，可以在这里添加，例如：
+          // background-color: #eee // 仅为示例
 
-    // 主内容区域在侧边栏收起后的左边距 (保持不变)
+
+    // 主内容区域在侧边栏收起后的左边距
     header, main, footer
       padding-left: $sidebar-collapsed-width
