@@ -1,22 +1,21 @@
----
 layout: post
-title: "彻底改变NLP的游戏规则：深入理解Transformer模型"
+title: "彻底改变 NLP 的游戏规则：深入理解 Transformer 模型"
 date: 2025-04-26 11:00:00 +0800 # 请修改为实际发布日期
 categories: [AI, NLP] # 示例分类
 tags: [transformer, attention, deep-learning, llm] # 示例标签
 comments: 1 # 如果允许评论
-featured_image: /assets/res/rocket.jpg
----
+
+## featured_image: /assets/res/rocket.jpg
 
 自 2017 年横空出世以来，Transformer 模型已经彻底重塑了自然语言处理（NLP）乃至整个人工智能领域的格局。告别了循环神经网络（RNN）和长短期记忆网络（LSTM）的顺序处理限制，Transformer 凭借其创新的 **自注意力（Self-Attention）机制**，实现了前所未有的并行计算能力和对长距离依赖的捕捉能力。这篇博文将带您深入了解这一革命性架构的核心。
 
-## 核心思想：“注意力”就够了
+#### 核心思想：“注意力”就够了
 
 Transformer 的核心理念在其开创性论文的标题中昭然若揭：“Attention Is All You Need”。在此之前，处理序列数据（如文本）的主流方法依赖于 RNN 或 CNN。RNN 按顺序处理输入，这使得并行计算变得困难，并且在处理长序列时容易丢失早期信息（即所谓的梯度消失/爆炸问题）。
 
 > Transformer 则另辟蹊径，完全基于**注意力机制**来绘制输入和输出之间的全局依赖关系。它允许模型在处理序列中的每个元素（例如一个词）时，同时“关注”到序列中所有其他元素，并根据相关性计算出该元素的加权表示。
 
-## 自注意力机制：模型如何“聚焦”
+#### 自注意力机制：模型如何“聚焦”
 
 想象一下您在阅读一个句子：“The animal didn't cross the street because **it** was too tired.” 当读到 "it" 时，您的大脑会自动将它与 "animal" 联系起来，理解 "it" 指代的是 "animal"。自注意力机制做的就是类似的事情，让模型理解词语之间的依赖关系，无论它们在句子中相隔多远。
 
@@ -70,7 +69,7 @@ class ScaledDotProductAttention(nn.Module):
 
 Transformer 的一个巨大优势在于，上述所有计算都可以高度并行化，因为每个位置的注意力计算不依赖于前一个位置的计算结果（与 RNN 不同），这极大地加速了模型的训练过程。
 
-## 多头注意力：从不同角度理解
+#### 多头注意力：从不同角度理解
 
 单一的注意力机制可能只关注到一种类型的相关性。为了让模型能够从不同的“角度”或表示子空间（representation subspaces）捕捉信息，Transformer 引入了**多头注意力（Multi-Head Attention）**。
 
@@ -78,7 +77,7 @@ Transformer 的一个巨大优势在于，上述所有计算都可以高度并�
 
 这种机制使得模型能够同时关注不同位置、不同类型的依赖关系。例如，一个头可能关注语法结构，另一个头可能关注语义关联。
 
-## 整体架构：编码器与解码器
+#### 整体架构：编码器与解码器
 
 标准的 Transformer 模型采用经典的**编码器-解码器（Encoder-Decoder）** 架构，这在机器翻译等序列到序列任务中非常有效。
 

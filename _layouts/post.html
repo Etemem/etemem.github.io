@@ -42,7 +42,8 @@ js: ["post.js"]   # 保持原有的 JS
 <div class="divider"></div>
 
 <div class="row">
-  <div class="col s12 post-content-area"> {{ content }}
+  <div class="col s12 post-content-area"> 
+    {{ content }}
   </div>
 </div>
 
@@ -66,19 +67,23 @@ js: ["post.js"]   # 保持原有的 JS
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1jvVUIA9cGxkF" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouWR/NZWKhr3BqvKLrDOQ5N4HduUbKdWpASagSyMARd" crossorigin="anonymous"></script>
 <script>
-    // 等待 DOM 加载完成后执行 KaTeX 渲染
-    document.addEventListener("DOMContentLoaded", function() {
-        renderMathInElement(document.body, {
-            // KaTeX 配置选项
-            delimiters: [
-                {left: "$$", right: "$$", display: true},  // 块级公式 $$...$$
-                {left: "$", right: "$", display: false},   // 行内公式 $...$
-                {left: "\\(", right: "\\)", display: false}, // 行内公式 \(...\)
-                {left: "\\[", right: "\\]", display: true}   // 块级公式 \[...\]
-            ],
-            // 如果遇到 KaTeX 不支持的命令，可以选择忽略或抛出错误
-            throwOnError : false
-        });
-    });
+    // *** 修改：使用 window.onload 确保所有资源加载完毕 ***
+    window.onload = function() {
+        try { // 添加 try...catch 以便调试
+            renderMathInElement(document.body, {
+                // KaTeX 配置选项
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},  // 块级公式 $$...$$
+                    {left: "$", right: "$", display: false},   // 行内公式 $...$
+                    {left: "\\(", right: "\\)", display: false}, // 行内公式 \(...\)
+                    {left: "\\[", right: "\\]", display: true}   // 块级公式 \[...\]
+                ],
+                // 如果遇到 KaTeX 不支持的命令，可以选择忽略或抛出错误
+                throwOnError : false
+            });
+        } catch (error) {
+            console.error("KaTeX rendering failed:", error);
+        }
+    };
 </script>
-
+```
