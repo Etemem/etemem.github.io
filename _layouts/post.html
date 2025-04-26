@@ -1,11 +1,10 @@
 ---
 layout: default
-css: ["post.css"] # 保持原有的 CSS
-js: ["post.js"]   # 保持原有的 JS
+css: ["post.css"]
+js: ["post.js"]
 ---
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-wcIxkf4k558fYv3mQP6rjrcSmikYiE1dpMb6ML+HElBx7FdBIAEKreq8VSrlDrL" crossorigin="anonymous">
-
 
 <div id="post-info">
   <h3>{{page.title}}</h3>
@@ -42,7 +41,7 @@ js: ["post.js"]   # 保持原有的 JS
 <div class="divider"></div>
 
 <div class="row">
-  <div class="col s12 post-content-area"> 
+  <div class="col s12 post-content-area">
     {{ content }}
   </div>
 </div>
@@ -54,7 +53,7 @@ js: ["post.js"]   # 保持原有的 JS
     this.page.url = "{{site.url}}{{site.baseurl}}{{page.url}}";
     this.page.identifier = "{{page.id}}";
   };
-  (function() { // DON'T EDIT BELOW THIS LINE
+  (function() {
     var d = document, s = d.createElement('script');
     s.src = '//{{site.disqus_shortname}}.disqus.com/embed.js';
     s.setAttribute('data-timestamp', +new Date());
@@ -65,25 +64,37 @@ js: ["post.js"]   # 保持原有的 JS
 {% endif %}
 
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1jvVUIA9cGxkF" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouWR/NZWKhr3BqvKLrDOQ5N4HduUbKdWpASagSyMARd" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouWR/NZWKhr3BqvKLrDOQ5N4HduUbKdWpASagSyMARd" crossorigin="anonymous"
+    onload="renderMath();"> // *** 修改：添加 onload 回调 ***
+</script>
 <script>
-    // *** 修改：使用 window.onload 确保所有资源加载完毕 ***
-    window.onload = function() {
-        try { // 添加 try...catch 以便调试
+    // *** 修改：将渲染逻辑放入一个函数中 ***
+    function renderMath() {
+      // 检查 renderMathInElement 函数是否已定义 (KaTeX 库是否加载)
+      if (typeof renderMathInElement === 'function') {
+        try {
             renderMathInElement(document.body, {
-                // KaTeX 配置选项
                 delimiters: [
-                    {left: "$$", right: "$$", display: true},  // 块级公式 $$...$$
-                    {left: "$", right: "$", display: false},   // 行内公式 $...$
-                    {left: "\\(", right: "\\)", display: false}, // 行内公式 \(...\)
-                    {left: "\\[", right: "\\]", display: true}   // 块级公式 \[...\]
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false},
+                    {left: "\\(", right: "\\)", display: false},
+                    {left: "\\[", right: "\\]", display: true}
                 ],
-                // 如果遇到 KaTeX 不支持的命令，可以选择忽略或抛出错误
                 throwOnError : false
             });
+            console.log("KaTeX rendering attempted."); // 添加日志方便调试
         } catch (error) {
             console.error("KaTeX rendering failed:", error);
         }
-    };
+      } else {
+        // 如果 KaTeX 还没加载好，可以稍后再试，或者提示错误
+        console.error("KaTeX auto-render script loaded, but 'renderMathInElement' function not found yet.");
+        // 可以选择设置一个短暂的延迟再次尝试，但这会增加复杂性
+        // setTimeout(renderMath, 100); 
+      }
+    }
+    // 虽然 auto-render.min.js 有 onload 回调，但 DOMContentLoaded 仍然是好的实践
+    // document.addEventListener("DOMContentLoaded", renderMath); 
+    // 注意：上面这行可以注释掉，因为我们现在依赖 auto-render.min.js 的 onload
 </script>
 ```
