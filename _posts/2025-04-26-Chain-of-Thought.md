@@ -5,7 +5,7 @@ date: 2025-04-26 14:00:00 +0800
 categories: [AI, LLM]
 tags: [chain-of-thought, prompting, reasoning]
 comments: 1
-featured_image: /assets/image/p2.jpg
+featured_image: /assets/res/p2.jpg
 ---
 
 大型语言模型（LLMs）在文本生成、翻译和问答等任务上展现了惊人的能力。然而，当面对需要多步骤推理的问题时，它们有时会“一步到位”地给出错误答案。为了引导模型进行更深入、更可靠的思考，研究者们提出了一种简单而有效的提示（Prompting）技术——**思维链（Chain-of-Thought, CoT）**。
@@ -44,7 +44,7 @@ A: 咖啡店一开始有5个苹果。他们用了2个，所以剩下 5 - 2 = 3�
 - **增强可解释性：** 通过观察模型生成的中间步骤，我们可以更好地理解模型的“思考”过程，判断它是如何得出最终答案的，这有助于调试和信任模型的输出。如果中间步骤出现错误，也更容易定位问题所在。
 - **激发涌现能力：** 有趣的是，思维链的效果似乎在足够大的模型（通常参数量超过某个阈值）上才会显现，这被认为是大型模型“涌现能力”的一种体现。
 
-![思维链过程示意图](https://placehold.co/600x300/E8E8E8/BDBDBD?text=Chain-of-Thought+Diagram){:.img-center .img-responsive .img-styled .img-max-50}
+![思维链过程示意图](assets/image/cot.jpg){:.img-center .img-responsive .img-styled .img-max-50}
 _(CoT 示意图)_
 
 ##### 不仅仅是示例：Zero-shot CoT
