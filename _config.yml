@@ -33,6 +33,11 @@ disqus_shortname: ""
 
 # Build settings
 markdown: kramdown
+kramdown:
+  input: GFM # 使用 GitHub Flavored Markdown
+  hard_wrap: false # 根据需要设置是否硬换行
+  syntax_highlighter: rouge # 保持语法高亮设置
+  math_engine: nil
 plugins:
   - jekyll-feed
   - jekyll-paginate
