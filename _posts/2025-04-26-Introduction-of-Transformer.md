@@ -29,7 +29,6 @@ Transformer 的核心理念在其开创性论文的标题中昭然若揭：“At
 这通常通过将输入向量 $X$ 分别乘以三个在训练过程中学习到的权重矩阵 $W^Q, W^K, W^V$ 来得到 $Q, K, V$ 矩阵。
 
 ![缩放点积注意力机制图示](https://www.researchgate.net/profile/Wele-Gedara-Chaminda-Bandara/publication/345805418/figure/fig2/AS:958013005828096@1605429090762/llustration-of-the-scaled-dot-product-attention-left-and-multi-head-attention-right.png)
-_图片来源：ResearchGate (建议本地化存储图片)_
 
 最常用的注意力计算方式是**缩放点积注意力 (Scaled Dot-Product Attention)**，其计算公式如下：
 
@@ -83,7 +82,7 @@ Transformer 的一个巨大优势在于，上述所有计算都可以高度并�
 
 标准的 Transformer 模型采用经典的**编码器-解码器（Encoder-Decoder）** 架构，这在机器翻译等序列到序列任务中非常有效。
 
-![Transformer 整体架构图示](https://jalammar.github.io/images/t/transformer_architecture.png)
+![Transformer 整体架构图示](/assets/image/transformer.jpg)
 
 **编码器（Encoder）** 部分由 N 层相同的层堆叠而成。每一层主要包含两个子层：一个多头自注意力层（让输入序列中的每个词关注序列中的其他词）和一个简单的、按位置独立应用的全连接前馈网络（Position-wise Feed-Forward Network）。每个子层之后都跟着一个残差连接（Residual Connection）和层归一化（Layer Normalization），这有助于缓解深度网络的训练难度并加速收敛。编码器的目标是将输入序列（例如源语言句子）转换成一系列富含上下文信息的向量表示。
 

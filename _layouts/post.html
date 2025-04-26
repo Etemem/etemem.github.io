@@ -1,8 +1,12 @@
 ---
 layout: default
-css: ["post.css"]
-js: ["post.js"]
+css: ["post.css"] # 保持原有的 CSS
+js: ["post.js"]   # 保持原有的 JS
 ---
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-wcIxkf4k558fYv3mQP6rjrcSmikYiE1dpMb6ML+HElBx7FdBIAEKreq8VSrlDrL" crossorigin="anonymous">
+
+
 <div id="post-info">
   <h3>{{page.title}}</h3>
   <ul class="collapsible hoverable" data-collapsible="accordion">
@@ -36,11 +40,12 @@ js: ["post.js"]
   </ul>
 </div>
 <div class="divider"></div>
+
 <div class="row">
-  <div class="col s12">
-    {{ content }}
+  <div class="col s12 post-content-area"> {{ content }}
   </div>
 </div>
+
 {% if site.disqus_shortname and page.comments %}
 <div id="disqus_thread"></div>
 <script>
@@ -57,3 +62,23 @@ js: ["post.js"]
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 {% endif %}
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1jvVUIA9cGxkF" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouWR/NZWKhr3BqvKLrDOQ5N4HduUbKdWpASagSyMARd" crossorigin="anonymous"></script>
+<script>
+    // 等待 DOM 加载完成后执行 KaTeX 渲染
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            // KaTeX 配置选项
+            delimiters: [
+                {left: "$$", right: "$$", display: true},  // 块级公式 $$...$$
+                {left: "$", right: "$", display: false},   // 行内公式 $...$
+                {left: "\\(", right: "\\)", display: false}, // 行内公式 \(...\)
+                {left: "\\[", right: "\\]", display: true}   // 块级公式 \[...\]
+            ],
+            // 如果遇到 KaTeX 不支持的命令，可以选择忽略或抛出错误
+            throwOnError : false
+        });
+    });
+</script>
+
