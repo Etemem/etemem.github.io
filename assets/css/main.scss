@@ -1,7 +1,4 @@
---- 
---- 
-
-// Overall
+--- --- // Overall
 
 body {
   display: flex;
@@ -35,7 +32,7 @@ main {
 
 // Header
 header {
-  height: 110px;
+  height: 120px;
 
   a:hover {
     text-decoration: none;
@@ -61,7 +58,7 @@ a.button-collapse.top-nav {
   color: #fff;
   font-size: 36px;
   z-index: 999;
-  line-height: 110px;
+  line-height: 120px;
 
   @media only screen and (min-width: 993px) {
     display: none !important;
@@ -71,9 +68,9 @@ a.button-collapse.top-nav {
 // nav 规则
 nav {
   .page-title {
-    font-size: 48px;
+    font-size: 50px;
     font-weight: bold;
-    line-height: 110px;
+    line-height: 120px;
     font-family: 'Ephesis', cursive;
     background-image: linear-gradient(to right, #ff0000, #ffa500, #ffff00, #008000, #0000ff, #4b0082, #ee82ee);
     -webkit-background-clip: text;
@@ -82,7 +79,7 @@ nav {
   }
 
   &.top-nav {
-    height: 110px;
+    height: 120px;
   }
 }
 
@@ -137,20 +134,20 @@ ul#slide-out.side-nav.fixed {
 // --- 背景替换规则 ---
 header nav.top-nav.teal {
   background-color: transparent !important;
-  background-image: url('../res/base.jpg');
-  background-size: cover;
-  background-position: center;
+  background-image: url('../res/top2.jpg');
+  background-size: auto 100%;
   background-repeat: no-repeat;
+  background-position: center center;
 }
 
 footer.page-footer.teal {
   background-color: transparent !important;
-  background-image: url('../res/base.jpg'); 
-  background-repeat: repeat-x;                
-  background-size: auto 100%;                  
-  background-position: center bottom;           
-  padding-top: 40px; 
-  padding-bottom: 20px; 
+  background-image: url('../res/base.jpg');
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+  background-position: center bottom;
+  padding-top: 40px;
+  padding-bottom: 20px;
 }
 
 header nav.top-nav .page-title {
