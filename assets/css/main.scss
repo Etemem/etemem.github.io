@@ -1,6 +1,5 @@
----
----
-// Overall
+--- --- // Overall
+
 body {
   display: flex;
   min-height: 100vh;
@@ -40,7 +39,7 @@ header {
   }
 
   .background {
-    background-image: url('../res/left.jpg');
+    background-image: url('../res/left1.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -48,7 +47,8 @@ header {
 }
 
 // 移动端按钮
-a.button-collapse.top-nav { // 合并选择器
+a.button-collapse.top-nav {
+  // 合并选择器
   position: absolute;
   text-align: center;
   height: 48px;
@@ -59,6 +59,7 @@ a.button-collapse.top-nav { // 合并选择器
   font-size: 36px;
   z-index: 999;
   line-height: 110px;
+
   @media only screen and (min-width: 993px) {
     display: none !important;
   }
@@ -102,6 +103,7 @@ blockquote {
 
 // --- 小屏幕 (< 992px) 样式 ---
 @media only screen and (max-width: 992px) {
+
   header,
   main,
   footer {
@@ -132,15 +134,15 @@ ul#slide-out.side-nav.fixed {
 // --- 背景替换规则 ---
 header nav.top-nav.teal {
   background-color: transparent !important;
-  background-image: url('../res/top.jpg');
+  background-image: url('../res/base.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-footer.page-footer.teal {
+base footer.page-footer.teal {
   background-color: transparent !important;
-  background-image: url('../res/top.jpg');
+  background-image: url('../res/base.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -163,7 +165,8 @@ $sidebar-width: 300px;
 $sidebar-collapsed-width: 70px;
 $sidebar-transition-speed: 0.3s;
 
-@media only screen and (min-width: 993px) { // 仅在大屏幕应用
+@media only screen and (min-width: 993px) {
+  // 仅在大屏幕应用
 
   #slide-out.side-nav.fixed {
     width: $sidebar-width;
@@ -175,13 +178,18 @@ $sidebar-transition-speed: 0.3s;
     .userView {
       padding: 32px 32px 15px 32px;
       transition: padding $sidebar-transition-speed ease;
-      .background { } // 可以留空或添加样式
+
+      .background {}
+
+      // 可以留空或添加样式
       .circle {
         width: 64px;
         height: 64px;
         transition: width $sidebar-transition-speed ease, height $sidebar-transition-speed ease;
       }
-      .name, .email {
+
+      .name,
+      .email {
         opacity: 1;
         transition: opacity 0.1s ease $sidebar-transition-speed;
       }
@@ -217,7 +225,9 @@ $sidebar-transition-speed: 0.3s;
   }
 
   // 主内容区域的左边距 (展开状态)
-  header, main, footer {
+  header,
+  main,
+  footer {
     padding-left: $sidebar-width;
     transition: padding-left $sidebar-transition-speed ease;
   }
@@ -232,11 +242,14 @@ $sidebar-transition-speed: 0.3s;
       .userView {
         padding: 15px 0;
         text-align: center;
-        .name, .email {
+
+        .name,
+        .email {
           opacity: 0;
           height: 0;
           display: none;
         }
+
         .circle {
           width: 48px;
           height: 48px;
@@ -248,9 +261,10 @@ $sidebar-transition-speed: 0.3s;
       li {
         a {
           justify-content: center; // 图标居中
-          padding: 0 12px;      // 统一收起时的 padding
+          padding: 0 12px; // 统一收起时的 padding
+
           i.material-icons {
-            margin-right: 0;      // 图标无右边距
+            margin-right: 0; // 图标无右边距
           }
         }
       }
@@ -263,12 +277,17 @@ $sidebar-transition-speed: 0.3s;
           overflow: hidden;
         }
       }
-       // 3. 切换按钮li#sidebar-toggle-item的a标签样式已在上面的通用 li a 中设置好
+
+      // 3. 切换按钮li#sidebar-toggle-item的a标签样式已在上面的通用 li a 中设置好
     }
 
     // 主内容区域在侧边栏收起后的左边距
-    header, main, footer {
+    header,
+    main,
+    footer {
       padding-left: $sidebar-collapsed-width;
     }
   }
-} // 结束 @media only screen and (min-width: 993px)
+}
+
+// 结束 @media only screen and (min-width: 993px)
