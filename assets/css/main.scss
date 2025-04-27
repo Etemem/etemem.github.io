@@ -295,4 +295,88 @@ $sidebar-transition-speed: 0.3s;
   }
 }
 
-// 结束 @media only screen and (min-width: 993px)
+
+.search-container {
+  position: relative; // 使结果列表可以相对于它定位
+  margin-top: 10px; // 调整垂直位置
+  margin-right: 15px; // 调整右边距
+
+  @media only screen and (max-width: 992px) {
+    // 在小屏幕上可能需要不同的样式，例如隐藏或移到侧边栏
+     display: none; // 示例：在小屏幕上隐藏
+  }
+
+  #search-input {
+    height: 3rem; // 调整高度以匹配导航栏
+    padding: 0 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.8); // 半透明背景
+    color: #333;
+    width: 200px; // 设置一个初始宽度
+    transition: width 0.3s ease-in-out;
+
+    &:focus {
+      background-color: rgba(255, 255, 255, 1);
+      outline: none;
+      box-shadow: none;
+      // width: 250px; // 聚焦时可以扩展宽度
+    }
+    &::placeholder {
+        color: #888;
+    }
+  }
+
+  #results-container {
+    position: absolute;
+    top: 100%; // 定位在输入框下方
+    left: 0;
+    width: 100%; // 与输入框同宽
+    max-height: 300px; // 限制最大高度
+    overflow-y: auto; // 超出则滚动
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 1000; // 确保在其他元素之上
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: none; // 默认隐藏
+
+    li {
+      padding: 8px 15px;
+      border-bottom: 1px solid #eee;
+      &:last-child {
+        border-bottom: none;
+      }
+
+      a {
+        color: #00796b; // 使用主题颜色
+        text-decoration: none;
+        display: block; // 使整个区域可点击
+        font-weight: 500;
+        &:hover {
+          background-color: #f5f5f5;
+        }
+      }
+
+      .search-date {
+          display: block;
+          font-size: 0.8em;
+          color: #888;
+          margin-top: 2px;
+      }
+    }
+     // "无结果" 时的样式
+     li:only-child { // 当只有一个 li 且是“无结果”时
+         color: #888;
+         font-style: italic;
+     }
+  }
+  // 当结果容器有内容时显示 (JS 会控制 display)
+   #results-container:not(:empty) {
+    // display: block; // JS 现在负责控制显示
+   }
+}
