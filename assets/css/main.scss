@@ -298,111 +298,135 @@ $sidebar-transition-speed: 0.3s;
 
 .search-container {
   position: relative; 
-  margin-top: 14px; // 微调垂直位置以更好地对齐导航栏项目
+  // 保持之前的垂直对齐和右边距
+  margin-top: 14px; 
   margin-right: 15px; 
   
   @media only screen and (max-width: 992px) {
-    display: none; // 在小屏幕上保持隐藏
+    display: none; 
   }
 
-  // 新增：包裹层样式
   .search-wrapper {
-      position: relative; // 为了绝对定位图标
+      position: relative; 
+      // 确保 wrapper 没有底部外边距，防止产生缝隙
+      margin-bottom: 0; 
   }
 
-  // 新增：图标样式
   .search-icon {
       position: absolute;
       top: 50%;
-      left: 10px; // 图标放在左边
+      left: 12px; // 微调图标位置
       transform: translateY(-50%);
-      color: #757575; // 图标颜色 (灰色)
-      pointer-events: none; // 防止图标干扰点击输入框
+      color: #757575; 
+      pointer-events: none; 
+      font-size: 20px; // 调整图标大小
   }
 
   #search-input {
-    height: 36px; // 调整高度以更匹配 Materialize 默认输入框
-    padding: 0 15px 0 40px; // 左侧留出空间给图标，右侧留些边距
-    border: 1px solid #ddd; // 添加细边框
-    border-radius: 20px; // 圆角边框
-    background-color: rgba(255, 255, 255, 0.9); 
+    height: 36px; 
+    padding: 0 20px 0 42px; // 增加右侧内边距，调整左侧
+    border: 1px solid #bdbdbd; // 稍微加深边框颜色
+    border-radius: 18px; // 调整为半圆角
+    background-color: #fff; // 使用不透明白色背景
     color: #333;
     width: 200px; 
-    transition: all 0.3s ease-in-out; // 平滑过渡效果
-    box-sizing: border-box; // 确保 padding 不会增加总宽度
-    margin: 0; // 去除可能的默认 margin
+    transition: all 0.3s ease-in-out; 
+    box-sizing: border-box; 
+    // *** 消除缝隙：确保输入框没有底部外边距 ***
+    margin: 0; 
+    outline: none; // 移除默认 outline
 
     &:focus {
       background-color: #fff;
-      border-color: #00796b; // 聚焦时边框使用主题色
-      outline: none;
-      box-shadow: 0 1px 3px rgba(0, 121, 107, 0.2); // 添加轻微阴影
-      width: 250px; // 聚焦时扩展宽度
+      border-color: #00695c; // 聚焦时主题色边框
+      // 使用 Materialize 风格的阴影
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); 
+      width: 250px; 
     }
     &::placeholder {
-        color: #aaa; // 调整占位符颜色
+        color: #9e9e9e; // 调整占位符颜色
     }
   }
 
   #results-container {
     position: absolute;
-    top: 100%; // 定位在输入框包裹层的正下方
+    // *** 消除缝隙：让下拉框顶部紧贴输入框底部 (wrapper 的 100%) ***
+    top: 100%; 
     left: 0;
-    width: 100%; // 与 search-wrapper 同宽 (随输入框扩展)
+    right: 0; // 让宽度自动适应 input 宽度变化
+    // width: 100%; // 不再固定宽度，让 left 和 right 控制
     max-height: 350px; 
     overflow-y: auto; 
-    background-color: #fff;
-    border: 1px solid #ddd; // 保持边框一致性
-    // border-top: none; // *** 去除顶部边框以消除缝隙 ***
-    border-radius: 0 0 8px 8px; // 底部圆角
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15); // 更明显的阴影
+    // *** 美化下拉框 ***
+    background-color: #ffffff; // 纯白背景
+    border: 1px solid #ccc; // 更清晰的边框
+    border-top: none; // *** 消除缝隙：移除顶部边框 ***
+    border-radius: 0 0 6px 6px; // 稍微调整底部圆角
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15); // 更柔和自然的阴影
     z-index: 1000; 
-    margin: 0; // *** 去除顶部 margin 以消除缝隙 ***
-    padding: 5px 0; // 调整内部上下 padding
+    // *** 消除缝隙：确保没有顶部外边距 ***
+    margin: 0; 
+    padding: 6px 0; // 统一的上下内边距
     list-style: none;
     display: none; 
+    min-width: 250px; // 设置最小宽度，避免收缩时太窄
 
     li {
-      // *** 解决紧凑问题 ***
-      padding: 6px 15px 6px 15px; // 减少垂直 padding
-      line-height: 1.4; // 调整行高
-      border-bottom: 1px solid #f0f0f0; // 更细的分隔线
+      padding: 0; // 移除 li 的 padding，让 a 标签控制
+      line-height: 1.4; 
+      border: none; // 移除 li 的 border-bottom
       
-      &:last-child {
-        border-bottom: none;
-      }
-       
       a {
-        color: #00695c; 
+        display: block; // 让 a 标签填满 li
+        padding: 8px 15px; // 在 a 标签上设置 padding
+        color: #333; // 默认文字颜色
         text-decoration: none;
-        display: block; // 保持块级显示以填充空间
-        font-weight: 500;
-        white-space: nowrap;     // *** 强制标题在一行 ***
-        overflow: hidden;        // *** 隐藏超出部分 ***
-        text-overflow: ellipsis; // *** 超出部分显示省略号 ***
-        margin-bottom: 2px;      // 在标题和日期之间增加一点点间距
+        white-space: nowrap;     
+        overflow: hidden;        
+        text-overflow: ellipsis; 
+        border-bottom: 1px solid #eee; // 分隔线移到 a 标签上
+        transition: background-color 0.2s ease; // 添加背景色过渡
 
         &:hover {
-          // background-color: #e0f2f1; // 淡绿色悬停效果
-          color: #004d40; // 悬停时加深颜色
+          // *** 美化下拉框：添加悬停效果 ***
+          background-color: #e0f2f1; // 主题色的浅色背景
+          color: #004d40; 
         }
       }
+
+       // 最后一个 a 标签没有下边框
+       &:last-child a {
+           border-bottom: none;
+       }
       
       .search-date {
-          // display: inline-block; // 改为块级显示，但在标题下方
-          // margin-left: 8px; // 如果想放在同一行，取消下面的注释并调整
           display: block; 
           font-size: 0.8em;
-          color: #888;
-          margin-top: 0; // 减少与标题的间距
+          color: #757575; // 日期颜色调整
+          margin-top: 1px; // 微调与标题的距离
+          padding: 0 15px 6px 15px; // 给日期添加一些内边距，避免贴边
       }
+      
+      // 如果日期直接跟在 a 标签内（修改模板后），则不需要上面的 .search-date 块样式
+      // 例如模板：'<li><a href="{url}">{title}<span class="search-date-inline">{date}</span></a></li>'
+      // .search-date-inline { 
+      //    font-size: 0.8em; 
+      //    color: #757575; 
+      //    margin-left: 8px; 
+      //    font-weight: normal;
+      // }
     }
+    
      // "无结果" 时的样式
-     li:only-child { 
+     li.no-results { // 给无结果 li 添加一个类（需要在 JS 中修改模板）
          color: #888;
          font-style: italic;
-         text-align: center; // 居中显示
+         text-align: center; 
          padding: 10px 15px;
+         border: none; // 无结果时不需要边框
+         cursor: default;
      }
+     // 或者如果不想改 JS 模板，用 :only-child 伪类，但样式稍有限制
+     // li:only-child { ... }
   }
 }
