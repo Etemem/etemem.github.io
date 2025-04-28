@@ -151,19 +151,29 @@ footer.page-footer.teal {
   background-position: center bottom;
   padding-top: 40px;
   padding-bottom: 20px;
+
+  .footer-copyright {
+    background-color: transparent; 
+    padding-top: 10px;
+    padding-bottom: 10px; 
+
+    .container {
+      color: #000000; // 黑色
+    }
+  }
 }
 
 header nav.top-nav .page-title {
   color: #FFFFFF;
 }
 
-footer.page-footer .grey-text.text-lighten-4 {
-  color: #e0e0e0 !important;
-}
+// footer.page-footer .grey-text.text-lighten-4 {
+//   color: #e0e0e0 !important;
+// }
 
-footer.page-footer .footer-copyright .container {
-  color: #e0e0e0;
-}
+// footer.page-footer .footer-copyright .container {
+//   color: #e0e0e0;
+// }
 
 // 桌面端可收起侧边栏样式
 $sidebar-width: 300px;
