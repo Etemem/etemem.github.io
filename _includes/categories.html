@@ -1,27 +1,48 @@
 <div class="col s12 cat-div">
   <div class="cat-list">
     {% for cat in site.categories %}
+    {% capture cat_slug %}{{ cat[0] | slugify }}{% endcapture %}
     {% capture test %}{{cat[0] | slice: 0}}{% endcapture %}
     {% capture testup %}{{cat[0] | slice: 0 | upcase}}{% endcapture %}
-    <a class="cat-chip" href="#{{cat[0] | slugify}}{% if test == testup %}_cap{% endif %}"><div class="chip z-depth-1">{{cat[0]}}</div></a>
+    <a class="cat-chip" href="#{{ cat_slug }}{% if test == testup %}_cap{% endif %}">
+      <div class="chip z-depth-1">{{ cat[0] }}</div>
+    </a>
     {% endfor %}
   </div>
+
+  <div class="filter-controls" style="margin-top: 15px; margin-bottom: 15px;">
+    <span style="margin-right: 10px; font-weight: bold;">筛选:</span>
+    {% for cat in site.categories %}
+    {% capture cat_slug %}{{ cat[0] | slugify }}{% endcapture %}
+    <button class="btn-flat filter-button waves-effect" data-filter="{{ cat_slug }}">
+      {{ cat[0] }}
+    </button>
+    {% endfor %}
+    <button class="btn-flat filter-button waves-effect active" data-filter="all">
+       显示全部
+    </button>
+  </div>
+
   <div class="divider"></div>
+
   <div class="cat-index">
     {% for cat in site.categories %}
+    {% capture cat_slug %}{{ cat[0] | slugify }}{% endcapture %}
     {% capture test %}{{cat[0] | slice: 0}}{% endcapture %}
     {% capture testup %}{{cat[0] | slice: 0 | upcase}}{% endcapture %}
-    <h4 id="{{cat[0] | slugify}}{% if test == testup %}_cap{% endif %}">{{cat[0]}}</h4>
-    <ul class="cat-post">
-      {% for post in cat[1] %}
-      <a class="post-title" href="{{site.baseurl}}{{post.url}}" target="_blank">
-        <li>
-          {{post.title}}
-          <small class="post-date">{{post.date | date_to_string}}</small>
-        </li>
-      </a>
-      {% endfor %}
-    </ul>
+    <div class="category-section" data-category="{{ cat_slug }}">
+      <h4 id="{{ cat_slug }}{% if test == testup %}_cap{% endif %}">{{ cat[0] }}</h4>
+      <ul class="cat-post">
+        {% for post in cat[1] %}
+        <a class="post-title" href="{{site.baseurl}}{{post.url}}" target="_blank">
+          <li>
+            {{post.title}}
+            <small class="post-date">{{post.date | date_to_string}}</small>
+          </li>
+        </a>
+        {% endfor %}
+      </ul>
+    </div>
     {% endfor %}
   </div>
 </div>
