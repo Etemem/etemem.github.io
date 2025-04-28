@@ -159,6 +159,7 @@ footer.page-footer.teal {
 
     .container {
       color: #000000; // 黑色
+      font-weight: bold;
     }
   }
 }
@@ -323,24 +324,23 @@ $sidebar-transition-speed: 0.3s;
   .search-icon {
       position: absolute;
       top: 50%;
-      left: 12px; // 微调图标位置
+      left: 12px; 
       transform: translateY(-50%);
       color: #757575; 
       pointer-events: none; 
-      font-size: 20px; // 调整图标大小
+      font-size: 20px; 
   }
 
   #search-input {
     height: 36px; 
-    padding: 0 20px 0 42px; // 增加右侧内边距，调整左侧
+    padding: 0 20px 0 42px; 
     border: 1px solid #bdbdbd; // 稍微加深边框颜色
-    border-radius: 18px; // 调整为半圆角
-    background-color: #fff; // 使用不透明白色背景
+    border-radius: 18px; // 半圆角
+    background-color: #fff; // 不透明白色背景
     color: #333;
     width: 200px; 
     transition: all 0.3s ease-in-out; 
     box-sizing: border-box; 
-    // 消除缝隙
     margin: 0; 
     outline: none; // 移除默认 outline
 

@@ -2,10 +2,8 @@
 # 空的 Front Matter
 ---
 document.addEventListener('DOMContentLoaded', function () {
-  // --- 解决 ReferenceError: 在开头处获取元素 ---
   const searchInput = document.getElementById('search-input');
   const resultsContainer = document.getElementById('results-container');
-  // --- 结束解决 ReferenceError ---
 
   // 检查 searchInput 和 resultsContainer 是否实际存在于页面上
   if (!searchInput || !resultsContainer) {
@@ -23,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     fuzzy: false
   });
 
-  // 可选：点击页面其他地方隐藏结果框
+  // 点击页面其他地方隐藏结果框
   document.addEventListener('click', function(event) {
     // 如果点击的不是搜索框或结果框内部
     if (!searchInput.contains(event.target) && !resultsContainer.contains(event.target)) {
@@ -31,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // 可选：搜索框获得焦点时显示结果框
+  // 搜索框获得焦点时显示结果框
   searchInput.addEventListener('focus', function() {
      // 只有当结果容器有内容（比如上次搜索有结果或显示"无结果"）时才显示
      if (resultsContainer.innerHTML.trim() !== '') { 
@@ -39,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function () {
      }
   });
 
-  // 可选：当输入时确保结果框可见 (SimpleJekyllSearch 默认会处理显示，但这个可以确保万无一失)
    searchInput.addEventListener('input', function() {
      if (searchInput.value.trim() !== '') { // 只有在输入内容后才强制显示
         resultsContainer.style.display = 'block';

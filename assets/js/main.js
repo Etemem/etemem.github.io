@@ -1,7 +1,6 @@
 (function($){
   $(function(){
 
-    // --- 初始化移动端侧边栏 (保持不变) ---
     try {
       $('.button-collapse').sideNav();
     } catch (e) {
@@ -13,7 +12,6 @@
       }
     }
 
-    // --- 桌面端侧边栏切换 (保持不变) ---
     const sidebarToggleButton = $('#sidebar-toggle-button');
     const bodyElement = $('body');
     if (sidebarToggleButton.length) {
@@ -34,9 +32,6 @@
        bodyElement.addClass('sidebar-collapsed');
     }
 
-    // ===========================================
-    // --- 新增：语言切换逻辑 ---
-    // ===========================================
     const languageToggleButton = $('#language-toggle-button');
     const navTextSpans = $('#slide-out .nav-text'); // 获取所有侧边栏文本 span
     const langToggleTextSpan = $('#language-toggle-button .nav-text'); // 切换按钮的文本 span
@@ -61,7 +56,7 @@
         }
       });
 
-      // 更新语言切换按钮本身的文本和图标 (如果图标也需要切换的话)
+      // 更新语言切换按钮本身的文本和图标
       if (translations.language_toggle) {
           langToggleTextSpan.text(translations.language_toggle);
       }
@@ -86,7 +81,6 @@
         updateSidebarText(currentLanguage);
       });
     }
-    // --- 结束新增：语言切换逻辑 ---
 
-  }); // end of document ready
-})(jQuery); // end of jQuery name space
+  }); 
+})(jQuery); 
