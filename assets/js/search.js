@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
     resultsContainer: resultsContainer,           // 使用上面获取的变量
     json: '{{ site.baseurl }}/search.json',       // Liquid 标签现在会被处理
     searchResultTemplate: '<li><a href="{url}">{title}</a><span class="search-date">{date}</span></li>',
-    noResultsText: '<li>无结果</li>',
+    noResultsText: '<li class="no-results">无结果</li>',
     limit: 10,
     fuzzy: false
   });
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
         resultsContainer.style.display = 'block';
      } else {
          // 如果输入框为空，可以考虑隐藏结果框或让 SimpleJekyllSearch 处理
-         // resultsContainer.style.display = 'none'; 
+         resultsContainer.style.display = 'none'; 
      }
    });
 
