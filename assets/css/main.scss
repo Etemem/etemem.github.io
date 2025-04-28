@@ -165,7 +165,7 @@ footer.page-footer .footer-copyright .container {
   color: #e0e0e0;
 }
 
-// --- 桌面端可收起侧边栏样式 ---
+// 桌面端可收起侧边栏样式
 $sidebar-width: 300px;
 $sidebar-collapsed-width: 70px;
 $sidebar-transition-speed: 0.3s;
@@ -220,7 +220,7 @@ $sidebar-transition-speed: 0.3s;
         }
       }
 
-      // 针对切换按钮 li 的特殊样式 (展开状态) - 如果需要可以添加，否则继承即可
+      // 针对切换按钮 li 的特殊样式 (展开状态) 
       // &#sidebar-toggle-item {
       //   a#sidebar-toggle-button {
       //     // 例如: background-color: lightblue;
@@ -237,7 +237,7 @@ $sidebar-transition-speed: 0.3s;
     transition: padding-left $sidebar-transition-speed ease;
   }
 
-  // --- 收起状态下的样式 ---
+  // 收起状态下的样式
   body.sidebar-collapsed {
 
     #slide-out.side-nav.fixed {
@@ -262,7 +262,7 @@ $sidebar-transition-speed: 0.3s;
         }
       }
 
-      // 1. 应用通用样式到所有 li > a (收起状态)
+      // 应用通用样式到所有 li > a (收起状态)
       li {
         a {
           justify-content: center; // 图标居中
@@ -274,7 +274,7 @@ $sidebar-transition-speed: 0.3s;
         }
       }
 
-      // 2. 单独隐藏非切换按钮的文本 (收起状态)
+      // 单独隐藏非切换按钮的文本 (收起状态)
       li:not(#sidebar-toggle-item) {
         .nav-text {
           opacity: 0;
@@ -282,8 +282,6 @@ $sidebar-transition-speed: 0.3s;
           overflow: hidden;
         }
       }
-
-      // 3. 切换按钮li#sidebar-toggle-item的a标签样式已在上面的通用 li a 中设置好
     }
 
     // 主内容区域在侧边栏收起后的左边距
@@ -332,14 +330,13 @@ $sidebar-transition-speed: 0.3s;
     width: 200px; 
     transition: all 0.3s ease-in-out; 
     box-sizing: border-box; 
-    // *** 消除缝隙：确保输入框没有底部外边距 ***
+    // 消除缝隙
     margin: 0; 
     outline: none; // 移除默认 outline
 
     &:focus {
       background-color: #fff;
       border-color: #00695c; // 聚焦时主题色边框
-      // 使用 Materialize 风格的阴影
       box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); 
       width: 250px; 
     }
@@ -350,21 +347,18 @@ $sidebar-transition-speed: 0.3s;
 
   #results-container {
     position: absolute;
-    // *** 消除缝隙：让下拉框顶部紧贴输入框底部 (wrapper 的 100%) ***
     top: 100%; 
     left: 0;
     right: 0; // 让宽度自动适应 input 宽度变化
     // width: 100%; // 不再固定宽度，让 left 和 right 控制
     max-height: 350px; 
     overflow-y: auto; 
-    // *** 美化下拉框 ***
-    background-color: #ffffff; // 纯白背景
+    background-color: #f8f8f8; 
     border: 1px solid #ccc; // 更清晰的边框
-    border-top: none; // *** 消除缝隙：移除顶部边框 ***
+    border-top: none; 
     border-radius: 0 0 6px 6px; // 稍微调整底部圆角
     box-shadow: 0 5px 10px rgba(0,0,0,0.15); // 更柔和自然的阴影
     z-index: 1000; 
-    // *** 消除缝隙：确保没有顶部外边距 ***
     margin: 0; 
     padding: 6px 0; // 统一的上下内边距
     list-style: none;
@@ -372,13 +366,13 @@ $sidebar-transition-speed: 0.3s;
     min-width: 250px; // 设置最小宽度，避免收缩时太窄
 
     li {
-      padding: 0; // 移除 li 的 padding，让 a 标签控制
+      padding: 0; 
       line-height: 1.4; 
-      border: none; // 移除 li 的 border-bottom
+      border: none; 
       
       a {
-        display: block; // 让 a 标签填满 li
-        padding: 8px 15px; // 在 a 标签上设置 padding
+        display: block; 
+        padding: 8px 15px; 
         color: #333; // 默认文字颜色
         text-decoration: none;
         white-space: nowrap;     
@@ -388,7 +382,6 @@ $sidebar-transition-speed: 0.3s;
         transition: background-color 0.2s ease; // 添加背景色过渡
 
         &:hover {
-          // *** 美化下拉框：添加悬停效果 ***
           background-color: #e0f2f1; // 主题色的浅色背景
           color: #004d40; 
         }
@@ -418,7 +411,7 @@ $sidebar-transition-speed: 0.3s;
     }
     
      // "无结果" 时的样式
-     li.no-results { // 给无结果 li 添加一个类（需要在 JS 中修改模板）
+     li.no-results { // 给无结果 li 添加一个类
          color: #888;
          font-style: italic;
          text-align: center; 
