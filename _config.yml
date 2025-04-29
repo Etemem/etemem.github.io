@@ -51,7 +51,7 @@ future: true
 
 # Language Settings
 languages:
-  en: # 英文
+  en: # English
     sidebar:
       home: "Home"
       projects: "Projects"
@@ -60,8 +60,32 @@ languages:
       rss: "RSS"
       about: "About"
       contact: "Contact"
-      language_toggle: "中文" # 切换按钮上显示的文字 (当前为英文时显示“中文”)
-      language_icon: "language" # Material Icon for the toggle button
+      language_toggle: "中文"
+      language_icon: "language"
+    page_titles: # 新增页面标题
+      home: "Home" 
+      projects: "GitHub Projects"
+      categories: "Categories"
+      tags: "Tags"
+      about: "About Me"
+      contact: "Contact"
+    header: 
+      search_placeholder: "Search posts..."
+    filter: 
+      label: "Filter:"
+      show_all: "Show All"
+    projects_page: 
+      show_forked: "Show forked projects"
+      statistics: "Statistics"
+      stars: "stars" 
+      forks: "forks" 
+      last_updated: "Last updated"
+    index_page: 
+      read_more: "Read More"
+    about_page: 
+      intro_prefix: "I am a "
+      intro_rotating: "Undergraduate Student, Computer Program Lover, Classical culture enthusiast, Explorers of New Things" 
+
   zh: # 中文
     sidebar:
       home: "首页"
@@ -71,8 +95,31 @@ languages:
       rss: "订阅"
       about: "关于"
       contact: "联系"
-      language_toggle: "English" # 切换按钮上显示的文字 (当前为中文时显示“English”)
-      language_icon: "language" # Material Icon for the toggle button
+      language_toggle: "English"
+      language_icon: "language"
+    page_titles: 
+      home: "首页"
+      projects: "GitHub 项目"
+      categories: "分类"
+      tags: "标签"
+      about: "关于我"
+      contact: "联系我"
+    header: 
+      search_placeholder: "搜索文章..."
+    filter: 
+      label: "筛选:"
+      show_all: "显示全部"
+    projects_page: 
+      show_forked: "显示 Fork 的项目"
+      statistics: "统计信息"
+      stars: "星标"
+      forks: "复刻"
+      last_updated: "最后更新"
+    index_page: 
+      read_more: "阅读更多"
+    about_page: 
+      intro_prefix: "我是一名"
+      intro_rotating: "本科生, 计算机程序爱好者, 古典文化爱好者, 新事物探索者" 
 
 # Default Language
 default_language: "en"

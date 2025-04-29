@@ -11,15 +11,14 @@
   </div>
 
   <div class="filter-controls" style="margin-top: 15px; margin-bottom: 15px;">
-    <span style="margin-right: 10px; font-weight: bold;">筛选:</span>
+    <span style="margin-right: 10px; font-weight: bold;" data-key="filter_label">筛选:</span> 
     {% for cat in site.categories %}
     {% capture cat_slug %}{{ cat[0] | slugify }}{% endcapture %}
     <button class="btn-flat filter-button waves-effect" data-filter="{{ cat_slug }}">
       {{ cat[0] }}
     </button>
     {% endfor %}
-    <button class="btn-flat filter-button waves-effect active" data-filter="all">
-       显示全部
+    <button class="btn-flat filter-button waves-effect active" data-filter="all" data-key="filter_show_all"> 显示全部
     </button>
   </div>
 
