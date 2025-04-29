@@ -39,8 +39,7 @@
       color: #0d47a1
       border-color: #1976D2
 
-// Style for the outer container card
-.index-card // *** RENAMED from .tag-card ***
+.index-card
   background-color: #e0f2f1
   border-radius: 16px
   padding: 20px 25px
@@ -51,28 +50,24 @@
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15)
     transform: translateY(-2px)
 
-  // Styles for sections *within* the main card
   .tag-section
-    padding-top: 20px // Add padding above each section title
+    padding-top: 20px
 
-    &:first-child // Remove top padding for the very first section
-       padding-top: 0
+    &:first-child
+      padding-top: 0  // *** Corrected indentation to 6 spaces ***
 
     h4
       margin-top: 0
       margin-bottom: 20px
-      // border-bottom: 1px solid #b2dfdb // *** REMOVED bottom border ***
-      padding-bottom: 0 // Removed padding as border is gone
+      padding-bottom: 0
       color: #004d40
 
-  // Divider style between sections
   hr.section-divider
     height: 1px
     border: 0
-    background-color: #b2dfdb // Color matching the theme
-    margin: 30px 0 // Spacing around the divider
+    background-color: #b2dfdb
+    margin: 30px 0
 
-// Styles for the post list remain mostly the same
 ul
   &:not(.browser-default)
     &.tag-post
@@ -107,9 +102,7 @@ ul
           margin-right: 6px
           color: #546e7a
 
-// Filtered out section style remains the same
 .tag-section.filtered-out
   display: none
-  // Also hide the divider before a filtered-out section
-  + .section-divider
+  + .section-divider // Use the direct adjacent sibling combinator
     display: none
