@@ -1,4 +1,3 @@
-{% comment %} Fetched and updated content for etemem.github.io/assets/js/filtering.js {% endcomment %}
 $(document).ready(function() {
   // 选择页面上所有类为 filter-button 的按钮
   $('.filter-controls .filter-button').on('click', function() {
