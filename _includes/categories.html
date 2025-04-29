@@ -11,7 +11,7 @@
   </div>
 
   <div class="filter-controls" style="margin-top: 15px; margin-bottom: 15px;">
-    <span style="margin-right: 10px; font-weight: bold;" data-key="filter_label">筛选:</span> 
+    <span style="margin-right: 10px; font-weight: bold;" data-key="filter_label">筛选:</span>
     {% for cat in site.categories %}
     {% capture cat_slug %}{{ cat[0] | slugify }}{% endcapture %}
     <button class="btn-flat filter-button waves-effect" data-filter="{{ cat_slug }}">
@@ -24,24 +24,34 @@
 
   <div class="divider"></div>
 
-  <div class="cat-index">
+  {% comment %} *** MOVED card class outside the loop, added index-card class *** {% endcomment %}
+  <div class="cat-index card index-card hoverable">
     {% for cat in site.categories %}
     {% capture cat_slug %}{{ cat[0] | slugify }}{% endcapture %}
     {% capture test %}{{cat[0] | slice: 0}}{% endcapture %}
     {% capture testup %}{{cat[0] | slice: 0 | upcase}}{% endcapture %}
+
+    {% comment %} *** ADDED divider before section, except for the first one *** {% endcomment %}
+    {% unless forloop.first %}
+      <hr class="section-divider">
+    {% endunless %}
+
+    {% comment %} *** REMOVED card class from here *** {% endcomment %}
     <div class="category-section" data-category="{{ cat_slug }}">
-      <h4 id="{{ cat_slug }}{% if test == testup %}_cap{% endif %}">{{ cat[0] }}</h4>
-      <ul class="cat-post">
-        {% for post in cat[1] %}
-        <a class="post-title" href="{{site.baseurl}}{{post.url}}" target="_blank">
-          <li>
-            {{post.title}}
-            <small class="post-date">{{post.date | date_to_string}}</small>
-          </li>
-        </a>
-        {% endfor %}
-      </ul>
+        <h4 id="{{ cat_slug }}{% if test == testup %}_cap{% endif %}">{{ cat[0] }}</h4>
+        <ul class="cat-post">
+          {% for post in cat[1] %}
+          <a class="post-title-link" href="{{site.baseurl}}{{post.url}}" target="_blank">
+            <li>
+              {{post.title}}
+              <span class="post-meta">
+                <i class="material-icons tiny left">date_range</i>{{post.date | date_to_string}}
+              </span>
+            </li>
+          </a>
+          {% endfor %}
+        </ul>
     </div>
     {% endfor %}
-  </div>
+  </div> {% comment %} *** End of index-card div *** {% endcomment %}
 </div>

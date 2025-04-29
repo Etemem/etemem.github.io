@@ -24,9 +24,55 @@
   .divider
     margin: 20px 0
 
-.post-date
-  margin-left: 10px
+.filter-controls
+  .filter-button
+    margin-right: 5px
+    margin-bottom: 5px
+    padding: 0 1rem
+    border: 1px solid #bdbdbd
+    border-radius: 4px
+    color: #616161
+    text-transform: none
 
+    &.active
+      background-color: #e3f2fd
+      color: #0d47a1
+      border-color: #1976D2
+
+// Style for the outer container card
+.index-card // *** RENAMED from .category-card ***
+  background-color: #e0f2f1
+  border-radius: 16px
+  padding: 20px 25px
+  margin-bottom: 30px
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)
+
+  &.hoverable:hover
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15)
+    transform: translateY(-2px)
+
+  // Styles for sections *within* the main card
+  .category-section
+    padding-top: 20px // Add padding above each section title
+
+    &:first-child // Remove top padding for the very first section
+       padding-top: 0
+
+    h4
+      margin-top: 0
+      margin-bottom: 20px
+      // border-bottom: 1px solid #b2dfdb // *** REMOVED bottom border ***
+      padding-bottom: 0 // Removed padding as border is gone
+      color: #004d40
+
+  // Divider style between sections
+  hr.section-divider
+    height: 1px
+    border: 0
+    background-color: #b2dfdb // Color matching the theme
+    margin: 30px 0 // Spacing around the divider
+
+// Styles for the post list remain mostly the same
 ul
   &:not(.browser-default)
     &.cat-post
@@ -34,33 +80,36 @@ ul
 
       a
         text-decoration: none
-        color: #1976D2
+        color: #333
+        display: block
 
       li
-        list-style-position: inside
-        padding-left: 40px
-
-        &:hover
-          list-style-type: circle
-          padding-left: 20px
-
+        list-style-type: none
+        background-color: #ffffff
+        border: 1px solid #e0e0e0
+        border-radius: 8px
+        padding: 12px 18px
+        margin-bottom: 10px
         @include transition(all .2s ease-in-out)
 
+        &:hover
+          background-color: #f5f5f5
 
-.filter-controls
-  .filter-button 
-    margin-right: 5px
-    margin-bottom: 5px 
-    padding: 0 1rem 
-    border: 1px solid #bdbdbd 
-    border-radius: 4px
-    color: #616161
-    text-transform: none
+      .post-meta
+        display: flex
+        align-items: center
+        font-size: 0.88rem
+        color: #757575
+        margin-top: 6px
 
-    &.active 
-      background-color: #e3f2fd 
-      color: #0d47a1      
-      border-color: #1976D2 
+        i.material-icons
+          font-size: 1.1rem
+          margin-right: 6px
+          color: #546e7a
 
+// Filtered out section style remains the same
 .category-section.filtered-out
   display: none
+  // Also hide the divider before a filtered-out section
+  + .section-divider
+    display: none

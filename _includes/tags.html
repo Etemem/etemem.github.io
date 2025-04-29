@@ -25,24 +25,34 @@
 
   <div class="divider"></div>
 
-  <div class="tag-index">
+  {% comment %} *** MOVED card class outside the loop, added index-card class *** {% endcomment %}
+  <div class="tag-index card index-card hoverable">
     {% for tag in site.tags %}
     {% capture tag_slug %}{{ tag[0] | slugify }}{% endcapture %}
     {% capture test %}{{tag[0] | slice: 0}}{% endcapture %}
     {% capture testup %}{{tag[0] | slice: 0 | upcase}}{% endcapture %}
+
+    {% comment %} *** ADDED divider before section, except for the first one *** {% endcomment %}
+    {% unless forloop.first %}
+      <hr class="section-divider">
+    {% endunless %}
+
+    {% comment %} *** REMOVED card class from here *** {% endcomment %}
     <div class="tag-section" data-tag="{{ tag_slug }}">
-      <h4 id="{{ tag_slug }}{% if test == testup %}_cap{% endif %}">{{ tag[0] }}</h4>
-      <ul class="tag-post">
-        {% for post in tag[1] %}
-        <a class="post-title" href="{{site.baseurl}}{{post.url}}" target="_blank">
-          <li>
-            {{post.title}}
-            <small class="post-date">{{post.date | date_to_string}}</small>
-          </li>
-        </a>
-        {% endfor %}
-      </ul>
+        <h4 id="{{ tag_slug }}{% if test == testup %}_cap{% endif %}">{{ tag[0] }}</h4>
+        <ul class="tag-post">
+          {% for post in tag[1] %}
+          <a class="post-title-link" href="{{site.baseurl}}{{post.url}}" target="_blank">
+            <li>
+              {{post.title}}
+              <span class="post-meta">
+                <i class="material-icons tiny left">date_range</i>{{post.date | date_to_string}}
+              </span>
+            </li>
+          </a>
+          {% endfor %}
+        </ul>
     </div>
     {% endfor %}
-  </div>
+  </div> {% comment %} *** End of index-card div *** {% endcomment %}
 </div>
