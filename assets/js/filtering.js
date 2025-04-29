@@ -4,10 +4,9 @@ $(document).ready(function() {
     const $this = $(this);
     const filterValue = $this.data('filter');
     const $allSections = $('.category-section, .tag-section'); // 获取所有文章区域
-    const $allDividers = $('hr.section-divider'); // *** 获取所有的分割线 ***
+    const $allDividers = $('hr.section-divider'); 
     const $filterButtons = $('.filter-controls .filter-button'); // 获取所有筛选按钮
 
-    // --- 更新按钮激活状态的逻辑 (保持不变) ---
     if (filterValue === 'all') {
       // 如果点击的是 "显示全部"
       $filterButtons.removeClass('active');
@@ -17,19 +16,16 @@ $(document).ready(function() {
       $('.filter-controls .filter-button[data-filter="all"]').removeClass('active'); // 取消 "显示全部" 的激活状态
       $this.toggleClass('active'); // 切换当前按钮的激活状态
 
-      // 检查是否还有其他按钮被选中，如果没有，则激活 "显示全部"
       if ($('.filter-controls .filter-button.active').length === 0) {
         $('.filter-controls .filter-button[data-filter="all"]').addClass('active');
       }
     }
 
-    // --- 获取当前所有激活的筛选器 (保持不变) ---
     let activeFilters = [];
     $('.filter-controls .filter-button.active').each(function() {
       activeFilters.push($(this).data('filter'));
     });
 
-    // --- *** 更新显示/隐藏 Sections 和 Dividers 的逻辑 *** ---
     if (activeFilters.includes('all') || activeFilters.length === 0) {
       // 如果是显示全部，则显示所有 sections 和 dividers
       $allSections.show();
@@ -48,12 +44,9 @@ $(document).ready(function() {
         if (sectionIdentifier && activeFilters.includes(sectionIdentifier)) {
           // 如果是，则显示这个 section
           $section.show();
-          // *** 同时，找到并显示这个 section 紧邻的前一个 hr 分割线 ***
           $section.prev('hr.section-divider').show();
         }
       });
     }
   });
-
-  // 初始状态下 "显示全部" 按钮已经是激活的 (来自 HTML)
 });
