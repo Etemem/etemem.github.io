@@ -76,15 +76,11 @@ languages:
       show_all: "Show All"
     projects_page:
       show_forked: "Show forked projects"
-      statistics: "Statistics"
       stars: "stars"
       forks: "forks"
       last_updated: "Last updated"
     index_page:
       read_more: "Read More"
-    about_page:
-      intro_prefix: "I am a "
-      intro_rotating: "Undergraduate Student, Computer Program Lover, Classical culture enthusiast, Explorers of New Things"
 
   zh: # 中文
     sidebar:
@@ -111,15 +107,11 @@ languages:
       show_all: "显示全部"
     projects_page:
       show_forked: "显示 Fork 的项目"
-      statistics: "统计信息"
       stars: "星标"
       forks: "复刻"
       last_updated: "最后更新"
     index_page:
       read_more: "阅读更多"
-    about_page:
-      intro_prefix: "我是一名"
-      intro_rotating: "本科生, 计算机程序爱好者, 古典文化爱好者, 新事物探索者"
-
+   
 # Default Language
 default_language: "en"
