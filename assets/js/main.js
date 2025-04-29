@@ -6,11 +6,11 @@
     try {
       if (typeof $.fn.sideNav === 'function') {
         $('.button-collapse').sideNav();
-        console.log("Initialized sideNav with $.fn.sideNav()");
+        // console.log("Initialized sideNav with $.fn.sideNav()"); // 可选保留或移除日志
       } else if (typeof M !== 'undefined' && M.Sidenav) {
         var sideNavElems = document.querySelectorAll('.sidenav');
         M.Sidenav.init(sideNavElems);
-        console.log("Initialized sideNav with M.Sidenav.init");
+        // console.log("Initialized sideNav with M.Sidenav.init"); // 可选保留或移除日志
       } else {
         console.error("Materialize sideNav function not found.");
       }
@@ -38,25 +38,9 @@
     const languageToggleButton = $('#language-toggle-button');
     let currentLanguage = localStorage.getItem('preferredLanguage') || window.defaultLanguage || 'en';
 
-    // *** Helper function to safely get nested properties ***
-    function getPropertyByPath(obj, path) {
-        const parts = path.split('_');
-        let current = obj;
-        for (const part of parts) {
-            if (current && typeof current === 'object' && part in current) {
-                current = current[part];
-            } else {
-                return null; // Path doesn't exist
-            }
-        }
-        // Only return if it's a string (or maybe number), not an object/array
-        return (typeof current === 'string' || typeof current === 'number') ? current : null;
-    }
-
-
-    // *** Revised通用文本更新函数 ***
+    // *** 修改：更可靠的文本更新函数 ***
     function updatePageText(lang) {
-      console.log(`Attempting to update text for language: ${lang}`); // Log language attempt
+      // console.log(`Attempting to update text for language: ${lang}`); // 可选调试日志
 
       if (!window.siteLanguages) {
           console.error("window.siteLanguages is not defined.");
@@ -67,61 +51,72 @@
         return;
       }
       const translations = window.siteLanguages[lang];
-      console.log("Translations object loaded:", translations); // Log loaded translations
+      // console.log("Translations object loaded:", translations); // 可选调试日志
 
       document.querySelectorAll('[data-key]').forEach(element => {
         const key = element.dataset.key;
-        console.log(`Processing element: ${element.tagName}#${element.id || ''}.${element.className || ''} with data-key: ${key}`); // Log element being processed
+        // console.log(`Processing element: ... with data-key: ${key}`); // 可选调试日志
 
         let text = null;
-        try {
-           text = getPropertyByPath(translations, key); // Use helper function
+        // *** 修改：新的查找逻辑 ***
+        const knownTopLevelKeys = ['sidebar', 'page_titles', 'header', 'filter', 'projects_page', 'index_page', 'about_page'];
+        let found = false;
 
-          if (text !== null) {
-            console.log(`  FOUND text: "${text}" for key: ${key}`); // Log found text
+        for (const topKey of knownTopLevelKeys) {
+            if (key.startsWith(topKey + '_')) {
+                const subKey = key.substring(topKey.length + 1); // 获取下划线之后的部分作为次级键
+                if (translations[topKey] && typeof translations[topKey] === 'object' && subKey in translations[topKey]) {
+                    text = translations[topKey][subKey];
+                    found = true;
+                    break; // 找到就跳出循环
+                }
+            }
+        }
 
-            // --- Element Update Logic ---
+        // (可以保留之前的 getPropertyByPath 作为备用，或者移除)
+        // if (!found) { // 如果上面的逻辑没找到，可以尝试旧的通用查找（但可能仍有问题）
+        //    console.warn(`Key ${key} not found via top-level check, trying general lookup.`);
+        //    // text = getPropertyByPath(translations, key); // 旧的查找方式
+        // }
+
+
+        // --- 更新元素 ---
+        if (text !== null && typeof text === 'string') { // 确保找到的是字符串
+            // console.log(`  FOUND text: "${text}" for key: ${key}`); // 可选调试日志
+
             if (element.tagName === 'INPUT' && element.hasAttribute('placeholder') && key === 'header_search_placeholder') {
-              console.log(`  Updating placeholder for input#${element.id}`);
               element.placeholder = text;
             } else if (element.id === 'js-rotating' && key === 'about_page_intro_rotating') {
-               console.log(`  Updating Morphext element#${element.id}`);
               try {
                  const $morphext = $(element);
                  if ($.fn.Morphext && $morphext.data('plugin_Morphext')) {
-                     console.log("    Stopping existing Morphext instance...");
                      $morphext.data('plugin_Morphext').stop();
                  }
-                 element.textContent = text; // Update text *before* re-init
-                 console.log("    Re-initializing Morphext...");
+                 element.textContent = text;
                  $morphext.Morphext({
                     animation: $morphext.data('animation') || "flip",
                     separator: $morphext.data('separator') || ",",
                     speed: parseInt($morphext.data('speed'), 10) || 2000,
                  });
-                 console.log("    Morphext re-initialized.");
               } catch(e) {
-                  console.error("    Error re-initializing Morphext:", e);
-                  element.textContent = text; // Fallback
+                  console.error("Error re-initializing Morphext:", e);
+                  element.textContent = text;
               }
-            } else if (element.dataset.tooltip && key.endsWith('_tooltip')) { // Basic check if key might be for a tooltip
-               console.log(`  Attempting to update tooltip for ${element.tagName} with key ${key}`);
+            } else if (element.dataset.tooltip && key.endsWith('_tooltip')) {
                element.dataset.tooltip = text;
-               // Add tooltip re-initialization logic if needed here
+               // 需要时添加 Tooltip 重新初始化代码
             } else {
-              console.log(`  Updating textContent for ${element.tagName}`);
-              element.textContent = text; // Default update
+              element.textContent = text;
             }
-            console.log(`  Update attempt finished for key: ${key}`); // Log after attempt
-
-          } else {
-             console.warn(`  Translation NOT found for key: ${key}`); // Highlight not found
+          } else if (text !== null) {
+              console.warn(`Value found for key "${key}" is not a string:`, text); // 如果找到的不是字符串则警告
           }
-        } catch (e) {
-           console.error(`  Error processing translation for key: ${key}`, e);
-        }
+          else {
+             // *** 这个警告现在应该能正确指示 _config.yml 中确实缺少的键 ***
+             console.warn(`Translation NOT found for key: ${key}`);
+          }
       });
-       console.log("Finished processing all data-key elements."); // Log end of processing
+       // console.log("Finished processing all data-key elements."); // 可选调试日志
     }
 
     // --- Initial Load & Event Listener ---
@@ -129,10 +124,6 @@
         updatePageText(currentLanguage);
     } else {
         console.warn("window.siteLanguages not defined on initial load. Translations might be delayed or fail.");
-        // Optional: Add a small delay or listen for a custom event if needed
-        // setTimeout(() => {
-        //   if(window.siteLanguages) updatePageText(currentLanguage);
-        // }, 200);
     }
 
     if (languageToggleButton.length) {
@@ -140,7 +131,7 @@
         e.preventDefault();
         currentLanguage = (currentLanguage === 'en') ? 'zh' : 'en';
         localStorage.setItem('preferredLanguage', currentLanguage);
-        updatePageText(currentLanguage); // Call the revised update function
+        updatePageText(currentLanguage);
       });
     }
 
