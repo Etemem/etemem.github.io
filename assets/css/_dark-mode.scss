@@ -78,8 +78,8 @@ body.dark-mode {
 
   // --- 页眉/页脚 ---
   header nav.top-nav.teal { // 覆盖 teal 背景色和图片
-     background-color: #1a1a1a !important;
-     background-image: none !important; // 或换成深色背景图
+     // background-color: #1a1a1a !important;
+     // background-image: none !important; // 或换成深色背景图
      .page-title {
         // 可能需要调整渐变色以适应深色背景，或者直接设为纯色
         color: #e0e0e0 !important; // 覆盖原来的透明色
