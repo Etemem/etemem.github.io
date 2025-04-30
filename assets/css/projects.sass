@@ -12,12 +12,12 @@
 .card
   margin-bottom: 20px
   border-radius: 10px
-  overflow: hidden // <--- 确保内部元素（如图、弹出层）被裁剪以适应圆角
-  transition: all 0.3s ease-in-out // 为悬浮效果添加过渡
+  overflow: hidden 
+  transition: all 0.3s ease-in-out 
 
-  &.hoverable:hover // 优化悬浮效果 (可选)
+  &.hoverable:hover 
     box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) // Materialize z-depth-4
-    transform: translateY(-4px) // 稍微上移一点
+    transform: translateY(-4px) 
     
   .card-content
     height: 7em

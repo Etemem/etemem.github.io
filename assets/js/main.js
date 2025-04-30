@@ -18,15 +18,46 @@
     const sidebarElement = $('#slide-out');
     const bodyElement = $('body');
     let isPinned = false;
+    let currentLanguage = localStorage.getItem('preferredLanguage') || window.defaultLanguage || 'en';
+
+    function getTranslatedString(key) {
+        if (window.siteLanguages && window.siteLanguages[currentLanguage] && window.siteLanguages[currentLanguage].sidebar && window.siteLanguages[currentLanguage].sidebar[key]) {
+            return window.siteLanguages[currentLanguage].sidebar[key];
+        }
+        return ''; // Fallback
+    }
+
+    function updateToggleButtonTooltip() {
+        if (!sidebarToggleButton.length || $(window).width() < 993) return;
+
+        let tooltipKey;
+        if (isPinned) {
+            tooltipKey = 'tooltip_unpin';
+        } else {
+            if (bodyElement.hasClass('sidebar-collapsed')) {
+                tooltipKey = 'tooltip_expand';
+            } else {
+                tooltipKey = 'tooltip_pin';
+            }
+        }
+        const tooltipText = getTranslatedString(tooltipKey);
+
+        sidebarToggleButton.attr('data-tooltip', tooltipText);
+        // Re-initialize tooltip to update text
+        sidebarToggleButton.tooltip('destroy');
+        sidebarToggleButton.tooltip({delay: 50, position: 'right'});
+    }
+
 
     function applySidebarState() {
       if (isPinned) {
         bodyElement.removeClass('sidebar-collapsed');
       } else {
-        if ($(window).width() >= 993) { // Only collapse if on desktop view
+        if ($(window).width() >= 993) {
              bodyElement.addClass('sidebar-collapsed');
         }
       }
+       updateToggleButtonTooltip(); // Update tooltip whenever state might change
     }
 
     const savedPinnedState = localStorage.getItem('sidebarPinnedState');
@@ -35,34 +66,26 @@
     } else {
       isPinned = false;
     }
-    
-    // Apply initial state based on pinned status OR original logic for non-pinned
+
     if (isPinned && $(window).width() >= 993) {
-        bodyElement.removeClass('sidebar-collapsed'); 
+        bodyElement.removeClass('sidebar-collapsed');
     } else if (!isPinned && $(window).width() >= 993) {
          bodyElement.addClass('sidebar-collapsed');
     }
-    // Note: Removed the direct reliance on 'sidebarState' for initial load if pinned logic exists.
+    
+    $('.tooltipped').tooltip({delay: 50}); // Initialize all tooltips on page load
+    updateToggleButtonTooltip(); // Set initial tooltip for the button
 
 
     if (sidebarToggleButton.length) {
       sidebarToggleButton.on('click', function(e) {
         e.preventDefault();
-         if ($(window).width() >= 993) { // Only allow pinning/unpinning on desktop
+         if ($(window).width() >= 993) {
             isPinned = !isPinned;
             localStorage.setItem('sidebarPinnedState', isPinned ? 'pinned' : 'unpinned');
-            
-            if (isPinned) {
-                 bodyElement.removeClass('sidebar-collapsed');
-            } else {
-                 bodyElement.addClass('sidebar-collapsed');
-                 // Simulate mouseleave might be needed if mouse is over sidebar when unpinning
-                 sidebarElement.trigger('mouseleave'); 
-            }
+            applySidebarState(); // This now also calls updateToggleButtonTooltip
+            sidebarElement.trigger('mouseleave');
          } else {
-             // On mobile, the button should probably just open/close the sidenav
-             // This part depends on how Materialize Sidenav handles it, might not need extra code
-             // Or find the instance and call .open()/.close() if needed
              const instance = M.Sidenav.getInstance(sidebarElement[0]);
              if (instance) {
                  if (instance.isOpen) {
@@ -80,6 +103,7 @@
         sidebarElement.on('mouseenter', function() {
             if (!isPinned) {
                 bodyElement.removeClass('sidebar-collapsed');
+                updateToggleButtonTooltip(); // Update tooltip when hovered open
             }
         });
 
@@ -87,6 +111,7 @@
             setTimeout(function() {
                 if (!isPinned && !sidebarElement.is(':hover')) {
                     bodyElement.addClass('sidebar-collapsed');
+                    updateToggleButtonTooltip(); // Update tooltip when collapsed after hover
                 }
             }, 100);
         });
@@ -94,7 +119,6 @@
 
 
     const languageToggleButton = $('#language-toggle-button');
-    let currentLanguage = localStorage.getItem('preferredLanguage') || window.defaultLanguage || 'en';
 
     function updatePageText(lang) {
       if (!window.siteLanguages) {
@@ -105,20 +129,22 @@
         console.error(`Language data object not found for: ${lang}`);
         return;
       }
+      currentLanguage = lang; // Update global language state
       const translations = window.siteLanguages[lang];
 
       document.querySelectorAll('[data-key]').forEach(element => {
         const key = element.dataset.key;
         let text = null;
         const knownTopLevelKeys = ['sidebar', 'page_titles', 'header', 'filter', 'projects_page', 'index_page'];
-        let found = false;
+        let sectionKey = null;
+        let subKey = null;
 
         for (const topKey of knownTopLevelKeys) {
             if (key.startsWith(topKey + '_')) {
-                const subKey = key.substring(topKey.length + 1);
-                if (translations[topKey] && typeof translations[topKey] === 'object' && subKey in translations[topKey]) {
-                    text = translations[topKey][subKey];
-                    found = true;
+                sectionKey = topKey;
+                subKey = key.substring(topKey.length + 1);
+                if (translations[sectionKey] && typeof translations[sectionKey] === 'object' && subKey in translations[sectionKey]) {
+                    text = translations[sectionKey][subKey];
                     break;
                 }
             }
@@ -134,9 +160,12 @@
                    break;
                  }
                }
-            } else if (element.dataset.tooltip && key.endsWith('_tooltip')) {
+            } else if (element.dataset.tooltip && key.endsWith('_tooltip') && element.id !== 'sidebar-toggle-button') { // Exclude toggle button tooltip here
                element.dataset.tooltip = text;
-            } else if (element.children.length > 0) {
+               // Re-init tooltip if needed for other elements
+               // $(element).tooltip('destroy');
+               // $(element).tooltip({delay: 50});
+            } else if (element.children.length > 0 && element.id !== 'sidebar-toggle-button') { // Exclude button text span if it existed
                let updated = false;
                for (let i = 0; i < element.childNodes.length; i++) {
                   if (element.childNodes[i].nodeType === Node.TEXT_NODE && element.childNodes[i].nodeValue.trim() !== '') {
@@ -145,13 +174,14 @@
                     break;
                   }
                }
-            } else {
+            } else if (element.id !== 'sidebar-toggle-button') { // Exclude button text span if it existed
               element.textContent = text;
             }
           } else if (text !== null) {
               console.warn(`Value found for key "${key}" is not a string:`, text);
           }
       });
+       updateToggleButtonTooltip(); // Update toggle button tooltip after language change
     }
 
     if (window.siteLanguages) {
@@ -163,9 +193,9 @@
     if (languageToggleButton.length) {
       languageToggleButton.on('click', function(e){
         e.preventDefault();
-        currentLanguage = (currentLanguage === 'en') ? 'zh' : 'en';
-        localStorage.setItem('preferredLanguage', currentLanguage);
-        updatePageText(currentLanguage);
+        let nextLanguage = (currentLanguage === 'en') ? 'zh' : 'en';
+        localStorage.setItem('preferredLanguage', nextLanguage);
+        updatePageText(nextLanguage); // Pass the new language to the update function
       });
     }
 

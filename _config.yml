@@ -66,7 +66,10 @@ languages:
       language_toggle: "中文"
       language_icon: "language"
       toggle_mode: "Toggle Mode"
-    page_titles: # *** 修改此部分的键名 ***
+      tooltip_expand: "Expand menu"       
+      tooltip_pin: "Keep menu expanded"    
+      tooltip_unpin: "Collapse menu"
+    page_titles: 
       home: "Home"
       github_projects: "GitHub Projects" 
       categories: "Categories"        
@@ -98,13 +101,16 @@ languages:
       language_toggle: "English"
       language_icon: "language"
       toggle_mode: "切换模式"
-    page_titles: # *** 修改此部分的键名 ***
+      tooltip_expand: "展开菜单"        
+      tooltip_pin: "固定展开菜单"        
+      tooltip_unpin: "收起菜单" 
+    page_titles: 
       home: "首页"
-      github_projects: "GitHub 项目" # <-- 修改
-      categories: "分类"           # <-- 这个应该本来就对
-      tags: "标签"               # <-- 这个应该本来就对
-      about_me: "关于 我"           # <-- 修改
-      contact: "联系 我"             # <-- 这个应该本来就对
+      github_projects: "GitHub 项目" 
+      categories: "分类"         
+      tags: "标签"              
+      about_me: "关于 我"        
+      contact: "联系 我"            
     header:
       search_placeholder: "搜索文章..."
     filter:
