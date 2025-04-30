@@ -47,6 +47,9 @@ exclude:
   - Gemfile.lock
 sass:
   style: compressed
+  load_paths:
+      - _sass 
+      - assets/css 
 future: true
 
 # Language Settings
