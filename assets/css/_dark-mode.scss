@@ -1,37 +1,40 @@
 body.dark-mode {
-  background-color: #121212; // 深色背景
-  color: #e0e0e0; // 浅色文字
+  background-color: #121212;
+  color: #e0e0e0;
 
   main {
-    background-image: none !important; // 移除或替换 main 的背景图
-    background-color: #1f1f1f; // main 区域的深色背景
+    background-image: none !important;
+    background-color: #1f1f1f;
   }
 
   a {
-    color: #8ab4f8; // 调整链接颜色
+    color: #8ab4f8;
     &:hover {
       color: #aecbfa;
     }
   }
 
   h1, h2, h3, h4, h5, h6 {
-    color: #f1f1f1; // 调整标题颜色
+    color: #f1f1f1;
   }
 
-  // --- 卡片样式 ---
   .card, .index-card, ul.tag-post li, ul.cat-post li {
     background-color: #2a2a2a;
-    border-color: #444; // 如果有边框
-    color: #e0e0e0; // 确保卡片内文字颜色合适
+    border-color: #444;
+    color: #e0e0e0;
 
     &:hover {
       background-color: #383838;
     }
   }
-  .index-card { // 针对分类/标签页的卡片
-     background-color: #253035; 
+  .index-card {
+     background-color: #253035;
+     .category-section h4,
+     .tag-section h4 {
+       color: #f1f1f1;
+     }
   }
-  .horizontal-card { // 首页文章卡片
+  .horizontal-card {
       background-color: #2a2a2a;
       .card-stacked .card-content #post-title {
          color: #e8eaed;
@@ -45,8 +48,8 @@ body.dark-mode {
       .card-stacked .card-action {
          background-color: #333;
          border-top-color: #444;
-         a.btn { // 阅读更多按钮
-           background-color: #3f51b5; // 可选调整按钮颜色
+         a.btn {
+           background-color: #3f51b5;
            &:hover {
                background-color: #5c6bc0;
            }
@@ -55,19 +58,18 @@ body.dark-mode {
   }
 
 
-  // --- 侧边栏 ---
   #slide-out.side-nav.fixed {
     background-color: #212121;
     .userView .name, .userView .email {
-       color: #e0e0e0 !important; // 覆盖 Materialize 的 !important
+       color: #e0e0e0 !important;
     }
      li a .nav-text, li a i.material-icons {
-        color: #bdbdbd; // 侧边栏链接文字和图标
+        color: #bdbdbd;
      }
      li a:hover {
-         background-color: rgba(255, 255, 255, 0.08); // 悬停效果
+         background-color: rgba(255, 255, 255, 0.08);
      }
-     li.active a { // 当前活动页面
+     li.active a {
          color: #ffffff;
          background-color: rgba(255, 255, 255, 0.12);
      }
@@ -76,22 +78,20 @@ body.dark-mode {
      }
   }
 
-  // --- 页眉/页脚 ---
-  header nav.top-nav.teal { // 覆盖 teal 背景色和图片
+  header nav.top-nav.teal {
      background-color: #1a1a1a !important;
-     background-image: none !important; 
+     background-image: none !important;
   }
-  footer.page-footer.teal { // 覆盖 teal 背景色和图片
+  footer.page-footer.teal {
      background-color: #1a1a1a !important;
-     background-image: none !important; 
+     background-image: none !important;
      .footer-copyright .container {
-         color: #aaa !important; // 调整版权文字颜色
-         font-weight: normal; 
+         color: #aaa !important;
+         font-weight: normal;
      }
   }
 
 
-  // --- 搜索框 ---
   .search-container #search-input {
      background-color: #333;
      border-color: #555;
@@ -101,7 +101,7 @@ body.dark-mode {
      }
      &:focus {
         background-color: #333;
-        border-color: #8ab4f8; 
+        border-color: #8ab4f8;
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3), 0 2px 10px 0 rgba(0, 0, 0, 0.25);
      }
   }
@@ -125,14 +125,13 @@ body.dark-mode {
    }
 
 
-  // --- 分类/标签页 过滤按钮和列表 ---
   .filter-controls .filter-button {
       color: #bdbdbd;
       border-color: #555;
       &.active {
-          background-color: #0d47a1; // 保持
+          background-color: #0d47a1;
           color: #fff;
-          border-color: #1976D2; // 保持
+          border-color: #1976D2;
       }
   }
   .tag-chip div, .cat-chip div {
@@ -147,13 +146,13 @@ body.dark-mode {
 
   .highlight {
     background-color: #272822;
-    color: #f8f8f2; 
+    color: #f8f8f2;
 
-    .c, .c1, .cs, .cm, .cd { color: #75715e; font-style: italic; } // 注释
-    .k, .kc, .kd, .kn, .kp, .kr, .kt, .kv { color: #66d9ef; font-weight: normal; } // 关键词
-    .s, .s1, .s2, .sb, .sc, .sd, .se, .sh, .si, .sr, .ss, .sx { color: #e6db74; } // 字符串
-    .nf, .py, .nc, .nn, .ne, .nl { color: #a6e22e; } // 函数/类名等
-    .nt { color: #f92672; } // HTML 标签名
-    .na { color: #a6e22e; } // HTML 属性名
+    .c, .c1, .cs, .cm, .cd { color: #75715e; font-style: italic; }
+    .k, .kc, .kd, .kn, .kp, .kr, .kt, .kv { color: #66d9ef; font-weight: normal; }
+    .s, .s1, .s2, .sb, .sc, .sd, .se, .sh, .si, .sr, .ss, .sx { color: #e6db74; }
+    .nf, .py, .nc, .nn, .ne, .nl { color: #a6e22e; }
+    .nt { color: #f92672; }
+    .na { color: #a6e22e; }
    }
 }
