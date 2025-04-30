@@ -1,7 +1,6 @@
 (function($){
   $(function(){
 
-    // --- Initialization logic (SideNav, Sidebar Toggle) ---
     try {
       if (typeof $.fn.sideNav === 'function') {
         $('.button-collapse').sideNav();
@@ -29,9 +28,6 @@
        bodyElement.addClass('sidebar-collapsed');
     }
 
-    // ===========================================
-    // --- Language Switching Logic ---
-    // ===========================================
     const languageToggleButton = $('#language-toggle-button');
     let currentLanguage = localStorage.getItem('preferredLanguage') || window.defaultLanguage || 'en';
 
@@ -49,7 +45,7 @@
       document.querySelectorAll('[data-key]').forEach(element => {
         const key = element.dataset.key;
         let text = null;
-        const knownTopLevelKeys = ['sidebar', 'page_titles', 'header', 'filter', 'projects_page', 'index_page']; // 移除 'about_page'
+        const knownTopLevelKeys = ['sidebar', 'page_titles', 'header', 'filter', 'projects_page', 'index_page'];
         let found = false;
 
         for (const topKey of knownTopLevelKeys) {
@@ -64,14 +60,9 @@
         }
 
         if (text !== null && typeof text === 'string') {
-            // *** 更新逻辑 ***
             if (element.tagName === 'INPUT' && element.hasAttribute('placeholder') && key === 'header_search_placeholder') {
               element.placeholder = text;
-            // *** 移除 Morphext 的特殊处理分支 ***
-            // } else if (element.id === 'js-rotating' && key === 'about_page_intro_rotating') {
-            //    // ... (相关代码已删除) ...
             } else if (key === 'projects_page_show_forked' && element.tagName === 'LABEL') {
-               // 处理项目页开关标签文本 (保持不变)
                for (let i = 0; i < element.childNodes.length; i++) {
                  if (element.childNodes[i].nodeType === Node.TEXT_NODE) {
                    element.childNodes[i].nodeValue = text;
@@ -81,7 +72,6 @@
             } else if (element.dataset.tooltip && key.endsWith('_tooltip')) {
                element.dataset.tooltip = text;
             } else if (element.children.length > 0) {
-               // 尝试更新包含子元素的元素的第一个文本节点 (保持不变)
                let updated = false;
                for (let i = 0; i < element.childNodes.length; i++) {
                   if (element.childNodes[i].nodeType === Node.TEXT_NODE && element.childNodes[i].nodeValue.trim() !== '') {
@@ -90,21 +80,15 @@
                     break;
                   }
                }
-               // if (!updated) { console.warn(...) } // 可选警告
             } else {
-              // 默认更新 textContent (保持不变)
               element.textContent = text;
             }
           } else if (text !== null) {
               console.warn(`Value found for key "${key}" is not a string:`, text);
           }
-          // else { // 之前移除的警告
-             // console.warn(`Translation NOT found for key: ${key}`);
-          // }
       });
     }
 
-    // --- Initial Load & Event Listener ---
     if (window.siteLanguages) {
         updatePageText(currentLanguage);
     } else {
@@ -120,5 +104,56 @@
       });
     }
 
-  }); // end of document ready
-})(jQuery); // end of jQuery name space
+    const darkModeToggle = $('#dark-mode-toggle');
+    const body = $('body');
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        body.addClass('dark-mode');
+      } else {
+        body.removeClass('dark-mode');
+      }
+    }
+
+    function getCurrentTheme() {
+      let preferredTheme = localStorage.getItem('theme');
+      if (preferredTheme) {
+        return preferredTheme;
+      } else {
+         return prefersDarkScheme.matches ? 'dark' : 'light';
+      }
+    }
+
+    let currentTheme = getCurrentTheme();
+    applyTheme(currentTheme);
+
+    if (darkModeToggle.length) {
+      darkModeToggle.on('click', function(e) {
+        e.preventDefault();
+        currentTheme = body.hasClass('dark-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', currentTheme);
+        applyTheme(currentTheme);
+      });
+    }
+
+     try {
+       prefersDarkScheme.addEventListener('change', (e) => {
+           if (!localStorage.getItem('theme')) {
+               applyTheme(e.matches ? 'dark' : 'light');
+           }
+       });
+     } catch (e1) {
+        try {
+            prefersDarkScheme.addListener((e) => {
+                if (!localStorage.getItem('theme')) {
+                    applyTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        } catch (e2) {
+            console.error("Browser doesn't support media query listeners for prefers-color-scheme.");
+        }
+     }
+
+  });
+})(jQuery);
