@@ -65,6 +65,7 @@ languages:
       contact: "Contact"
       language_toggle: "中文"
       language_icon: "language"
+      toggle_mode: "Toggle Mode"
     page_titles: # *** 修改此部分的键名 ***
       home: "Home"
       github_projects: "GitHub Projects" # <-- 修改：匹配 "GitHub Projects" -> github_projects
@@ -96,6 +97,7 @@ languages:
       contact: "联系"
       language_toggle: "English"
       language_icon: "language"
+      toggle_mode: "切换模式"
     page_titles: # *** 修改此部分的键名 ***
       home: "首页"
       github_projects: "GitHub 项目" # <-- 修改
