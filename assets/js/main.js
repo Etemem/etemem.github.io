@@ -24,7 +24,7 @@
         if (window.siteLanguages && window.siteLanguages[currentLanguage] && window.siteLanguages[currentLanguage].sidebar && window.siteLanguages[currentLanguage].sidebar[key]) {
             return window.siteLanguages[currentLanguage].sidebar[key];
         }
-        return ''; // Fallback
+        return '';
     }
 
     function updateToggleButtonTooltip() {
@@ -43,7 +43,6 @@
         const tooltipText = getTranslatedString(tooltipKey);
 
         sidebarToggleButton.attr('data-tooltip', tooltipText);
-        // Re-initialize tooltip to update text
         sidebarToggleButton.tooltip('destroy');
         sidebarToggleButton.tooltip({delay: 50, position: 'right'});
     }
@@ -57,7 +56,7 @@
              bodyElement.addClass('sidebar-collapsed');
         }
       }
-       updateToggleButtonTooltip(); // Update tooltip whenever state might change
+       updateToggleButtonTooltip();
     }
 
     const savedPinnedState = localStorage.getItem('sidebarPinnedState');
@@ -72,9 +71,9 @@
     } else if (!isPinned && $(window).width() >= 993) {
          bodyElement.addClass('sidebar-collapsed');
     }
-    
-    $('.tooltipped').tooltip({delay: 50}); // Initialize all tooltips on page load
-    updateToggleButtonTooltip(); // Set initial tooltip for the button
+
+    $('.tooltipped').tooltip({delay: 50});
+    updateToggleButtonTooltip();
 
 
     if (sidebarToggleButton.length) {
@@ -83,7 +82,7 @@
          if ($(window).width() >= 993) {
             isPinned = !isPinned;
             localStorage.setItem('sidebarPinnedState', isPinned ? 'pinned' : 'unpinned');
-            applySidebarState(); // This now also calls updateToggleButtonTooltip
+            applySidebarState();
             sidebarElement.trigger('mouseleave');
          } else {
              const instance = M.Sidenav.getInstance(sidebarElement[0]);
@@ -100,10 +99,16 @@
 
 
     if (sidebarElement.length && $(window).width() >= 993) {
-        sidebarElement.on('mouseenter', function() {
+        sidebarElement.on('mouseenter', function(event) {
+            // **** 新增判断：如果鼠标进入的目标是切换按钮本身或其内部，则不展开 ****
+            if ($(event.target).closest('#sidebar-toggle-button').length > 0) {
+                return; 
+            }
+            // ****************************************************************
+
             if (!isPinned) {
                 bodyElement.removeClass('sidebar-collapsed');
-                updateToggleButtonTooltip(); // Update tooltip when hovered open
+                updateToggleButtonTooltip();
             }
         });
 
@@ -111,7 +116,7 @@
             setTimeout(function() {
                 if (!isPinned && !sidebarElement.is(':hover')) {
                     bodyElement.addClass('sidebar-collapsed');
-                    updateToggleButtonTooltip(); // Update tooltip when collapsed after hover
+                    updateToggleButtonTooltip();
                 }
             }, 100);
         });
@@ -129,7 +134,7 @@
         console.error(`Language data object not found for: ${lang}`);
         return;
       }
-      currentLanguage = lang; // Update global language state
+      currentLanguage = lang;
       const translations = window.siteLanguages[lang];
 
       document.querySelectorAll('[data-key]').forEach(element => {
@@ -160,12 +165,9 @@
                    break;
                  }
                }
-            } else if (element.dataset.tooltip && key.endsWith('_tooltip') && element.id !== 'sidebar-toggle-button') { // Exclude toggle button tooltip here
+            } else if (element.dataset.tooltip && key.endsWith('_tooltip') && element.id !== 'sidebar-toggle-button') {
                element.dataset.tooltip = text;
-               // Re-init tooltip if needed for other elements
-               // $(element).tooltip('destroy');
-               // $(element).tooltip({delay: 50});
-            } else if (element.children.length > 0 && element.id !== 'sidebar-toggle-button') { // Exclude button text span if it existed
+            } else if (element.children.length > 0 && element.id !== 'sidebar-toggle-button') {
                let updated = false;
                for (let i = 0; i < element.childNodes.length; i++) {
                   if (element.childNodes[i].nodeType === Node.TEXT_NODE && element.childNodes[i].nodeValue.trim() !== '') {
@@ -174,14 +176,14 @@
                     break;
                   }
                }
-            } else if (element.id !== 'sidebar-toggle-button') { // Exclude button text span if it existed
+            } else if (element.id !== 'sidebar-toggle-button') {
               element.textContent = text;
             }
           } else if (text !== null) {
               console.warn(`Value found for key "${key}" is not a string:`, text);
           }
       });
-       updateToggleButtonTooltip(); // Update toggle button tooltip after language change
+       updateToggleButtonTooltip();
     }
 
     if (window.siteLanguages) {
@@ -195,7 +197,7 @@
         e.preventDefault();
         let nextLanguage = (currentLanguage === 'en') ? 'zh' : 'en';
         localStorage.setItem('preferredLanguage', nextLanguage);
-        updatePageText(nextLanguage); // Pass the new language to the update function
+        updatePageText(nextLanguage);
       });
     }
 
