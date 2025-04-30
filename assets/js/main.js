@@ -15,18 +15,83 @@
     }
 
     const sidebarToggleButton = $('#sidebar-toggle-button');
+    const sidebarElement = $('#slide-out');
     const bodyElement = $('body');
+    let isPinned = false;
+
+    function applySidebarState() {
+      if (isPinned) {
+        bodyElement.removeClass('sidebar-collapsed');
+      } else {
+        if ($(window).width() >= 993) { // Only collapse if on desktop view
+             bodyElement.addClass('sidebar-collapsed');
+        }
+      }
+    }
+
+    const savedPinnedState = localStorage.getItem('sidebarPinnedState');
+    if (savedPinnedState === 'pinned') {
+      isPinned = true;
+    } else {
+      isPinned = false;
+    }
+    
+    // Apply initial state based on pinned status OR original logic for non-pinned
+    if (isPinned && $(window).width() >= 993) {
+        bodyElement.removeClass('sidebar-collapsed'); 
+    } else if (!isPinned && $(window).width() >= 993) {
+         bodyElement.addClass('sidebar-collapsed');
+    }
+    // Note: Removed the direct reliance on 'sidebarState' for initial load if pinned logic exists.
+
+
     if (sidebarToggleButton.length) {
       sidebarToggleButton.on('click', function(e) {
         e.preventDefault();
-        bodyElement.toggleClass('sidebar-collapsed');
-        localStorage.setItem('sidebarState', bodyElement.hasClass('sidebar-collapsed') ? 'collapsed' : 'expanded');
+         if ($(window).width() >= 993) { // Only allow pinning/unpinning on desktop
+            isPinned = !isPinned;
+            localStorage.setItem('sidebarPinnedState', isPinned ? 'pinned' : 'unpinned');
+            
+            if (isPinned) {
+                 bodyElement.removeClass('sidebar-collapsed');
+            } else {
+                 bodyElement.addClass('sidebar-collapsed');
+                 // Simulate mouseleave might be needed if mouse is over sidebar when unpinning
+                 sidebarElement.trigger('mouseleave'); 
+            }
+         } else {
+             // On mobile, the button should probably just open/close the sidenav
+             // This part depends on how Materialize Sidenav handles it, might not need extra code
+             // Or find the instance and call .open()/.close() if needed
+             const instance = M.Sidenav.getInstance(sidebarElement[0]);
+             if (instance) {
+                 if (instance.isOpen) {
+                     instance.close();
+                 } else {
+                     instance.open();
+                 }
+             }
+         }
       });
     }
-    const savedSidebarState = localStorage.getItem('sidebarState');
-    if (savedSidebarState === 'collapsed' && $(window).width() >= 993) {
-       bodyElement.addClass('sidebar-collapsed');
+
+
+    if (sidebarElement.length && $(window).width() >= 993) {
+        sidebarElement.on('mouseenter', function() {
+            if (!isPinned) {
+                bodyElement.removeClass('sidebar-collapsed');
+            }
+        });
+
+        sidebarElement.on('mouseleave', function() {
+            setTimeout(function() {
+                if (!isPinned && !sidebarElement.is(':hover')) {
+                    bodyElement.addClass('sidebar-collapsed');
+                }
+            }, 100);
+        });
     }
+
 
     const languageToggleButton = $('#language-toggle-button');
     let currentLanguage = localStorage.getItem('preferredLanguage') || window.defaultLanguage || 'en';

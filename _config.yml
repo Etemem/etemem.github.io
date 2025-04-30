@@ -68,11 +68,11 @@ languages:
       toggle_mode: "Toggle Mode"
     page_titles: # *** 修改此部分的键名 ***
       home: "Home"
-      github_projects: "GitHub Projects" # <-- 修改：匹配 "GitHub Projects" -> github_projects
-      categories: "Categories"          # <-- 这个应该本来就对
-      tags: "Tags"                      # <-- 这个应该本来就对
-      about_me: "About Me"              # <-- 修改：匹配 "About Me" -> about_me
-      contact: "Contact"                # <-- 这个应该本来就对
+      github_projects: "GitHub Projects" 
+      categories: "Categories"        
+      tags: "Tags"                    
+      about_me: "About Me"            
+      contact: "Contact"            
     header:
       search_placeholder: "Search posts..."
     filter:
@@ -103,8 +103,8 @@ languages:
       github_projects: "GitHub 项目" # <-- 修改
       categories: "分类"           # <-- 这个应该本来就对
       tags: "标签"               # <-- 这个应该本来就对
-      about_me: "关于我"           # <-- 修改
-      contact: "联系我"             # <-- 这个应该本来就对
+      about_me: "关于 我"           # <-- 修改
+      contact: "联系 我"             # <-- 这个应该本来就对
     header:
       search_placeholder: "搜索文章..."
     filter:
