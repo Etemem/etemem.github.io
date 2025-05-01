@@ -14,10 +14,10 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: SmallWorldBigDream
-description: > # this means to ignore newlines until "baseurl:"
-  Material theme based on <a href="http://materializecss.com">Materialize.css</a> for jekyll sites
+description: > 
+  SmallWorldBigDream: A personal website exploring computer science, technology insights, creative writing, and life reflections. Continuously learning and sharing knowledge.
 baseurl: ""
-url: "https://etemem.github.io"
+url: "https://www.smallworldbigdream.cn" 
 permalink: /:year/:month/:day/:title
 repository: Etemem/etemem.github.io
 paginate: 5
@@ -48,8 +48,8 @@ exclude:
 sass:
   style: compressed
   load_paths:
-      - _sass 
-      - assets/css 
+      - _sass
+      - assets/css
 future: true
 
 # Language Settings
@@ -66,16 +66,16 @@ languages:
       language_toggle: "中文"
       language_icon: "language"
       toggle_mode: "Toggle Mode"
-      tooltip_expand: "Expand menu"       
-      tooltip_pin: "Keep menu expanded"    
+      tooltip_expand: "Expand menu"
+      tooltip_pin: "Keep menu expanded"
       tooltip_unpin: "Collapse menu"
-    page_titles: 
+    page_titles:
       home: "Home"
-      github_projects: "GitHub Projects" 
-      categories: "Categories"        
-      tags: "Tags"                    
-      about_me: "About Me"            
-      contact: "Contact"            
+      github_projects: "GitHub Projects"
+      categories: "Categories"
+      tags: "Tags"
+      about_me: "About Me"
+      contact: "Contact"
     header:
       search_placeholder: "Search posts..."
     filter:
@@ -101,16 +101,16 @@ languages:
       language_toggle: "English"
       language_icon: "language"
       toggle_mode: "切换模式"
-      tooltip_expand: "展开菜单"        
-      tooltip_pin: "固定展开菜单"        
-      tooltip_unpin: "收起菜单" 
-    page_titles: 
+      tooltip_expand: "展开菜单"
+      tooltip_pin: "固定展开菜单"
+      tooltip_unpin: "收起菜单"
+    page_titles:
       home: "首页"
-      github_projects: "GitHub 项目" 
-      categories: "分类"         
-      tags: "标签"              
-      about_me: "关于 我"        
-      contact: "联系 我"            
+      github_projects: "GitHub 项目"
+      categories: "分类"
+      tags: "标签"
+      about_me: "关于 我"
+      contact: "联系"
     header:
       search_placeholder: "搜索文章..."
     filter:
@@ -123,6 +123,6 @@ languages:
       last_updated: "最后更新"
     index_page:
       read_more: "阅读更多"
-   
+
 # Default Language
 default_language: "en"
