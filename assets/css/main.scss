@@ -179,7 +179,7 @@ header nav.top-nav .page-title {
 // 桌面端可收起侧边栏样式
 $sidebar-width: 300px;
 $sidebar-collapsed-width: 70px;
-$sidebar-transition-speed: 1s;
+$sidebar-transition-speed: 0.6s;
 
 @media only screen and (min-width: 993px) {
   // 仅在大屏幕应用
