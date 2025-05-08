@@ -179,7 +179,7 @@ header nav.top-nav .page-title {
 // 桌面端可收起侧边栏样式
 $sidebar-width: 300px;
 $sidebar-collapsed-width: 70px;
-$sidebar-transition-speed: 0.3s;
+$sidebar-transition-speed: 1s;
 
 @media only screen and (min-width: 993px) {
   // 仅在大屏幕应用
@@ -351,7 +351,7 @@ $sidebar-transition-speed: 0.3s;
       width: 250px; 
     }
     &::placeholder {
-        color: #9e9e9e; // 调整占位符颜色
+        color: #9e9e9e; 
     }
   }
 
@@ -359,15 +359,15 @@ $sidebar-transition-speed: 0.3s;
     position: absolute;
     top: 100%; 
     left: 0;
-    right: 0; // 让宽度自动适应 input 宽度变化
+    right: 0; 
     // width: 100%; // 不再固定宽度，让 left 和 right 控制
     max-height: 350px; 
     overflow-y: auto; 
     background-color: #f8f8f8; 
-    border: 1px solid #ccc; // 更清晰的边框
+    border: 1px solid #ccc; 
     border-top: none; 
-    border-radius: 0 0 6px 6px; // 稍微调整底部圆角
-    box-shadow: 0 5px 10px rgba(0,0,0,0.15); // 更柔和自然的阴影
+    border-radius: 0 0 6px 6px; 
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15); 
     z-index: 1000; 
     margin: 0; 
     padding: 6px 0; // 统一的上下内边距
@@ -405,12 +405,12 @@ $sidebar-transition-speed: 0.3s;
       .search-date {
           display: block; 
           font-size: 0.8em;
-          color: #757575; // 日期颜色调整
-          margin-top: 1px; // 微调与标题的距离
-          padding: 0 15px 6px 15px; // 给日期添加一些内边距，避免贴边
+          color: #757575; 
+          margin-top: 1px; 
+          padding: 0 15px 6px 15px; 
       }
       
-      // 如果日期直接跟在 a 标签内（修改模板后），则不需要上面的 .search-date 块样式
+      // 如果日期直接跟在 a 标签内，则不需要上面的 .search-date 块样式
       // 例如模板：'<li><a href="{url}">{title}<span class="search-date-inline">{date}</span></a></li>'
       // .search-date-inline { 
       //    font-size: 0.8em; 
@@ -421,7 +421,7 @@ $sidebar-transition-speed: 0.3s;
     }
     
      // "无结果" 时的样式
-     li.no-results { // 给无结果 li 添加一个类
+     li.no-results { 
          color: #888;
          font-style: italic;
          text-align: center; 
@@ -429,7 +429,7 @@ $sidebar-transition-speed: 0.3s;
          border: none; // 无结果时不需要边框
          cursor: default;
      }
-     // 或者如果不想改 JS 模板，用 :only-child 伪类，但样式稍有限制
+     // 或者如果不想改 JS 模板，用 :only-child 伪类
      // li:only-child { ... }
   }
 }
